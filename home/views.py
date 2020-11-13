@@ -13,7 +13,6 @@ db = firebase.database() ##database reference
 authe = firebase.auth()   ##authentication reference
 #######################################################################
 # Create your views here.
-<<<<<<< HEAD
 
 def texts_page(request):
     return render(request,'texts_page.html')
@@ -54,61 +53,6 @@ def landing_page_with_context(request, context):
 def landing_page_register(request):
     return render(request, "landing_page_register.html")
 
-=======
-
-def home_page(request):
-    if request.method == 'POST':  ## signing in user
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-
-        try:
-            user = authe.sign_in_with_email_and_password(email, password)
-            userInfo = authe.get_account_info(user['idToken'])
-
-            print(userInfo["users"][0]["emailVerified"])
-
-            if userInfo["users"][0]["emailVerified"] == False : 
-                context = {
-                    "not_verified_email" : True,
-                    "bad_login" : False,
-                    "POST_request": False
-                }
-                return landing_page_with_context(request, context)
-                
-            if userInfo["users"][0]["emailVerified"] == True:
-                # print(user)
-                tempEmail = ""
-                for i in email :
-                    if i == '@':
-                        break
-                    if i == '.':
-                        tempEmail += '@'
-                        continue
-                    tempEmail += i
-                userDB = db.child("users").child(tempEmail).get()
-                # print(userD)
-                user["displayName"] = userDB.val()["fName"]
-    
-                # print(user)
-
-                context = {
-                    'user_name': user["displayName"]
-                }
-                return render(request, 'home_page.html', context)
-        except: ## Wrong Credentials
-            context = {
-                "not_verified_email" : False,
-                'bad_login' : True,
-                "POST_request" : False
-            }
-            return landing_page_with_context(request, context)
-
-    return render(request,'home_page.html')
-
-def landing_page_with_context(request, context):
-    return render(request, 'landing_page.html', context)
-
->>>>>>> 9c63efb5d13206dbce28635b574abc6bc4d84db3
 def landing_page(request):
     if request.method == 'POST':  ## registering a user
         fName = request.POST.get("fName")
@@ -144,7 +88,6 @@ def landing_page(request):
             tempEmail += i
 
         # print(tempEmail)
-<<<<<<< HEAD
 
         db.child("users").child(tempEmail).set(data)
         
@@ -211,24 +154,3 @@ def home_page(request):
 
     return render(request,'home_page.html')
 
-=======
-
-        db.child("users").child(tempEmail).set(data)
-        
-        context = {
-            "not_verified_email" : False,
-            'bad_login' : False,
-            "POST_request" : True
-        }
-        return render(request, 'landing_page.html', context)
-    
-    context = {
-            "not_verified_email" : False,
-            'bad_login' : False,
-            "POST_request" : False
-        }
-    return render(request,'landing_page.html', context)
-
-def landing_page_register(request):
-    return render(request, "landing_page_register.html")
->>>>>>> 9c63efb5d13206dbce28635b574abc6bc4d84db3

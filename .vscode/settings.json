@@ -15,8 +15,4 @@
         "**/requirements{/**,*}.{txt,in}": "pip-requirements"
     },
     "editor.suggest.showSnippets": true
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 9c63efb5d13206dbce28635b574abc6bc4d84db3
