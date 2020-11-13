@@ -10,7 +10,11 @@ function checkPassAndConPass(){
     var passAfterLength = conPass.value.substring(0, conPassLength);
 
     // console.log(passAfterLength);
+<<<<<<< HEAD
     //console.log(password.value);
+=======
+    console.log(password.value);
+>>>>>>> 9c63efb5d13206dbce28635b574abc6bc4d84db3
 
     if(conPass.value != password.value){
         document.getElementById("message").innerHTML= "<span style='color:red'>Password and confirm password not matching</span>";
