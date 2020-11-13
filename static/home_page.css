@@ -9,26 +9,25 @@ body {
   -moz-box-shadow: 3px 43px 87px 21px rgba(0,0,0,0.75);
   box-shadow: 3px 43px 87px 21px rgba(0,0,0,0.75);
   }
+span {
+  align-items: center;
+  padding-left: 40px;
+}
 #image_container {
     padding-right: 40px;
 }  
-span {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding-left: 40px;
-    padding-right: 40px;
-  }
+
   
   .dropdown {
     position: relative;
-    display: inline-block;
+    align-items: center;
+    padding-left: 40px;
   }
   
   .dropdown-content {
-    
     display: none;
-    position: absolute;
-    min-width: 160px;
+    position: fixed;
+    min-width: 150px;
     box-shadow: 3px 43px 87px 21px rgba(0,0,0,0.75);
     z-index: 1;
   }
@@ -41,7 +40,7 @@ span {
     display: block;
   }
   
-  .dropdown-content a:hover {background-color: #ddd;}
+  .dropdown-content a:hover {background-color: rgb(80, 76, 76);}
   
   .dropdown:hover .dropdown-content {display: block;}
   
