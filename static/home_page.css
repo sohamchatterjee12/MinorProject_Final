@@ -54,4 +54,59 @@ body {
     display: block;
     min-width:144.94px
   }
+
+  /* grid layout configuration */
+ #image {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+}
+  .grid-container {
+    position: relative;
+    border: 0px solid rgba(231, 209, 9, 0);
+    width: 50%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    left:24%;
+    top:10%;
+  }
   
+  .grid-item {
+    
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(224, 15, 15, 0);
+    border: 1px solid rgba(223, 16, 16, 0);
+    font-size: 30px;
+    text-align: center;
+    margin: 10px;
+  }
+  .effect-text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #7e82835e;
+  }
+  
+  .grid-item:hover .overlay {
+    opacity: 1;
+  }

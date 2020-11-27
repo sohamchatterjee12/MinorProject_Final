@@ -14,5 +14,6 @@
         "**/templates/**/*.html": "django-html",
         "**/requirements{/**,*}.{txt,in}": "pip-requirements"
     },
-    "editor.suggest.showSnippets": true
+    "editor.suggest.showSnippets": true,
+    "python.pythonPath": "C:\\Users\\atharva\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
 }

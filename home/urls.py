@@ -19,5 +19,8 @@ urlpatterns = [
     path("require_service", views.require_service_page, name="require_service"),
     path("account_details", views.account_details_page, name="account_details"),
     path("all_transactions", views.all_transactions_page, name="all_transactions"),
-    
+    path("forgot_password", views.forgot_password, name="forgot_password"),
+    path("logout", views.logout, name="logout"),
+    path("login", views.login, name="login"),
+    path("test", views.test, name="test")
 ]

@@ -266,3 +266,13 @@ input[type=submit]{
 #icon {
   width:60%;
 }
+
+
+/* modals */
+.modal-footer {   
+  border-top: 0px; 
+}
+
+.modal-body, .panel, .panel-body, .modal-content, .modal-header{
+  background-image: url('common/page_bg.jpg');
+}
