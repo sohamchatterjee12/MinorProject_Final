@@ -58,6 +58,13 @@ def texts_page(request):
 
 def interests_page(request):
     if request.session.is_empty() == False:
+        interest_shown_response = db.child("interests_shown").child(request.session["uid"]).get() 
+        interest_received_response = db.child("interests_received").child(request.session["uid"]).get() 
+        
+        interests_shown=interest_shown_response.val()
+        interests_received=interest_received_response.val()
+        print(interests_shown)
+        print(interests_received)
         return render(request,'interests_page.html')
     else:
         return landing_page_with_context(request, {'first_login' : True})
