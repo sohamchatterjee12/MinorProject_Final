@@ -123,9 +123,9 @@ body {
       padding:15px
   }
 
+
   .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
     background-color: #363535;
     left:50%
     
@@ -156,7 +156,5 @@ body {
   .tabcontent {
     display: none;
     padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
   }
   /* styling interest card */
