@@ -1,29 +1,60 @@
-<!doctype html>
-<html>
+<div class="interest_cards">
 
-<head>
-    <meta charset="utf-8">
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js">
-    </script>
-</head>
+    <span class="row">
+      <div class="column">
+        <div class="card tabcontent">
+          <span class="container101">
+            <img class="interest_ad" src="static/common/logo_final_2.png">
+            <span>################################################################</span>
+            <p>details about the ad/product</p>
+            <p>details about the ad/product</p>
+            <span>
+              <button type="button">Accept</button>
+              <button type="button"> Decline</button>
+            </span>
+        </div>
+      </div>
+    </span>
 
-<body onload="brython()">
+    <span class="row">
+      <div class="column">
+        <div class="card">
+          <span class="container101">
+            <img class="interest_ad" src="static/common/logo_final_2.png">
+            <span>################################################################</span>
+            <p>details about the ad/product</p>
+            <p>details about the ad/product</p>
+            <span class="response101">Interest Accepted</span>
+        </div>
+      </div>
+    </span>
 
-<script type="text/python">
-from browser import document
-x = document.select("#testbutton")
-def action(event):
-    document <= "Hello !"
-x.bind("click", action)
+
+    <span class="row">
+      <div class="column">
+        <div class="card">
+          <span class="container101">
+            <img class="interest_ad" src="static/common/logo_final_2.png">
+            <span>################################################################</span>
+            <p>details about the ad/product</p>
+            <p>details about the ad/product</p>
+            <span class="response101">Interest Rejected</span>
+        </div>
+      </div>
+    </span>
+
+    <span class="row">
+      <div class="column">
+        <div class="card">
+          <span class="container101">
+            <img class="interest_ad" src="static/common/logo_final_2.png">
+            <span>################################################################</span>
+            <p>details about the ad/product</p>
+            <p>details about the ad/product</p>
+            <span class="response101">Waiting for Response</span>
+        </div>
+      </div>
+    </span>
 
 
-
-{% comment %} document <= "Hello !" {% endcomment %}
-</script>
-
-
-<button id="testbutton">click</button>
-</body>
-
-</html>
+  </div>

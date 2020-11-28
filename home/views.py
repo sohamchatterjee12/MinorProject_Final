@@ -61,11 +61,15 @@ def interests_page(request):
         interest_shown_response = db.child("interests_shown").child(request.session["uid"]).get() 
         interest_received_response = db.child("interests_received").child(request.session["uid"]).get() 
         
-        interests_shown=interest_shown_response.val()
-        interests_received=interest_received_response.val()
-        print(interests_shown)
-        print(interests_received)
-        return render(request,'interests_page.html')
+        interest_shown=interest_shown_response.val()
+        interest_received=interest_received_response.val()
+        print(interest_shown)
+        print(interest_received)
+        context={}
+        context["interest_shown"]=interest_shown
+        context["interest_received"]=interest_received
+        print(context)
+        return render(request,'interests_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 

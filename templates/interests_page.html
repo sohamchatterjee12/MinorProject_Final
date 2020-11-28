@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<script type="text/javascript" src="static/interests_page.js"></script>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
     <a class="navbar-brand" href="#" id="image_container">
       <img src="static/common/logo_final_2.png" width="120" height="60" loading="lazy" alt="404">
@@ -48,69 +49,60 @@
 
 
 
+<div class="tab">
+  <button class="tablinks" onclick="show(event, 'shown')">Interests Shown</button>
+  <button class="tablinks" onclick="show(event, 'receive')">Interests Received</button>
+</div>
 
 
-
-  <div class="interest_cards">
-
-    <span class="row">
-      <div class="column">
-        <div class="card">
-          <span class="container101">
-            <img class="interest_ad" src="static/common/logo_final_2.png">
-            <span>################################################################</span>
-            <p>details about the ad/product</p>
-            <p>details about the ad/product</p>
-            <span>
-              <button type="button">Accept</button>
-              <button type="button"> Decline</button>
-            </span>
+<div class="interest_cards tabcontent" id="shown">
+  {% with interest_shown_list=interest_shown %}
+  {% for interest in interest_shown_list %}
+    {% if interest.0 == 1 %}
+      <span class="row">
+        <div class="column">
+          <div class="card">
+            <span class="container101">
+              <img class="interest_ad" src="static/common/logo_final_2.png">
+              <span>You have shown interest in this product.</span>
+              <p>details about the ad/product</p>
+              <p>details about the ad/product</p>
+              <span class="response101">Interest Accepted</span>
+          </div>
         </div>
-      </div>
-    </span>
+      </span>
 
-    <span class="row">
-      <div class="column">
-        <div class="card">
-          <span class="container101">
-            <img class="interest_ad" src="static/common/logo_final_2.png">
-            <span>################################################################</span>
-            <p>details about the ad/product</p>
-            <p>details about the ad/product</p>
-            <span class="response101">Interest Accepted</span>
+    {% elif interest.0 == -1 %}
+      <span class="row">
+        <div class="column">
+          <div class="card">
+            <span class="container101">
+              <img class="interest_ad" src="static/common/logo_final_2.png">
+              <span>You have shown interest in this product.</span>
+              <p>details about the ad/product</p>
+              <p>details about the ad/product</p>
+              <span class="response101">Interest Rejected</span>
+          </div>
         </div>
-      </div>
-    </span>
+      </span>
 
-
-    <span class="row">
-      <div class="column">
-        <div class="card">
-          <span class="container101">
-            <img class="interest_ad" src="static/common/logo_final_2.png">
-            <span>################################################################</span>
-            <p>details about the ad/product</p>
-            <p>details about the ad/product</p>
-            <span class="response101">Interest Rejected</span>
+    {% else %}
+      <span class="row">
+        <div class="column">
+          <div class="card">
+            <span class="container101">
+              <img class="interest_ad" src="static/common/logo_final_2.png">
+              <span>You have shown interest in this product.</span>
+              <p>details about the ad/product</p>
+              <p>details about the ad/product</p>
+              <span class="response101">Waiting for Response</span>
+          </div>
         </div>
-      </div>
-    </span>
-
-    <span class="row">
-      <div class="column">
-        <div class="card">
-          <span class="container101">
-            <img class="interest_ad" src="static/common/logo_final_2.png">
-            <span>################################################################</span>
-            <p>details about the ad/product</p>
-            <p>details about the ad/product</p>
-            <span class="response101">Waiting for Response</span>
-        </div>
-      </div>
-    </span>
-
-
-  </div>
+      </span>
+    {% endif %}
+  {% endfor %}
+  {% endwith %}
+</div>
 
   <!--interests card not ended here-->
 
