@@ -3,9 +3,25 @@
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="icon" href="static/common/logo_final_2.png" type="image/gif" sizes="16x16">
   <link rel="stylesheet" href="static\interests_page.css">
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
 </head>
 
 <body>
+<script>
+  const firebaseConfig = {
+        apiKey: "AIzaSyAXwgisDN7kx6BMZCIwYjj8KNDgmJuz1Mg",
+        authDomain: "exampledjango-4af38.firebaseapp.com",
+        databaseURL: "https://exampledjango-4af38.firebaseio.com",
+        projectId: "exampledjango-4af38",
+        storageBucket: "exampledjango-4af38.appspot.com",
+        messagingSenderId: "476609483924",
+        appId: "1:476609483924:web:14a07bf9950ed344809081",
+        measurementId: "G-Q8RNK0P4KT"
+      };
+      // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
 <script type="text/javascript" src="static/interests_page1.js"></script>
 <script type="text/javascript" src="static/interests_page2.js"></script>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
@@ -152,8 +168,8 @@
               <p>details about the ad/product</p>
               <p>details about the ad/product</p>
               <span>
-                <button type="button" onclick="changeStatus(event,'accepted')">Accept</button>
-                <button type="button" onclick="changeStatus(event,'rejected')"> Decline</button>
+                <button type="button" onclick="changeStatus(event,'accepted',{{uid}},interest.3,interest.1,interest.2)">Accept</button>
+                <button type="button" onclick="changeStatus(event,'rejected',{{uid}},interest.3,interest.1,interest.2)"> Decline</button>
               </span>
           </div>
         </div>

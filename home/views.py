@@ -60,24 +60,34 @@ def interests_page(request):
     if request.session.is_empty() == False:
         interest_shown_response = db.child("interests_shown").child(request.session["uid"]).get() 
         interest_received_response = db.child("interests_received").child(request.session["uid"]).get() 
+        interest_shown_keys_response=db.child("interests_shown").child(request.session["uid"]).shallow().get()
+        interest_received_keys_response=db.child("interests_received").child(request.session["uid"]).shallow().get() 
         
         interest_shown=interest_shown_response.val()
         interest_received=interest_received_response.val()
-        print(interest_shown)
-        print(interest_received)
+        interest_shown_keys=list(interest_shown_keys_response.val())
+        interest_received_keys=list(interest_received_keys_response.val())
+        
+        count=0
         for i in interest_shown:
             shownName=db.child("userId").child(i[2]).get()
             fullName=shownName.val()["fName"]+" "+shownName.val()["lName"]
             print(fullName)
             i[2]=fullName
+            i.append(int(interest_shown_keys[count]))
+            count+=1
+        count=0
         for i in interest_received:
             receivedName=db.child("userId").child(i[2]).get()
             fullName=receivedName.val()["fName"]+" "+receivedName.val()["lName"]
             print(fullName)
             i[2]=fullName
+            i.append(int(interest_received_keys[count]))
+            count+=1
         context={}
         context["interest_shown"]=interest_shown
         context["interest_received"]=interest_received
+        context["uid"]=request.session["uid"]
         print(context)
         return render(request,'interests_page.html',context)
     else:
