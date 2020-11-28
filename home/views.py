@@ -65,6 +65,16 @@ def interests_page(request):
         interest_received=interest_received_response.val()
         print(interest_shown)
         print(interest_received)
+        for i in interest_shown:
+            shownName=db.child("userId").child(i[2]).get()
+            fullName=shownName.val()["fName"]+" "+shownName.val()["lName"]
+            print(fullName)
+            i[2]=fullName
+        for i in interest_received:
+            receivedName=db.child("userId").child(i[2]).get()
+            fullName=receivedName.val()["fName"]+" "+receivedName.val()["lName"]
+            print(fullName)
+            i[2]=fullName
         context={}
         context["interest_shown"]=interest_shown
         context["interest_received"]=interest_received
