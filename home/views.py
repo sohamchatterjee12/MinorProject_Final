@@ -155,6 +155,11 @@ def landing_page_register(request):
 
 
 def landing_page(request):
+    if request.session.is_empty()==False:
+        context={
+            "user_name":request.session["fName"]
+        }
+        return home_page_with_context(request,context)
     if request.method == 'POST':  ## registering a user
         fName = request.POST.get("fName")
         lName = request.POST.get("lName")
