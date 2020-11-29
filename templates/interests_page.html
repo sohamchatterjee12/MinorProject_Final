@@ -74,6 +74,7 @@
 
 <div class="interest_cards tabcontent" id="shown">
   {% with interest_shown_list=interest_shown %}
+  {% if interest_shown_list|length > 0 %}
   {% for interest in interest_shown_list %}
     {% if interest.0 == 1 %}
       <span class="row">
@@ -82,7 +83,7 @@
             <span class="container101">
               <img class="interest_ad" src="static/common/logo_final_2.png">
               <span>You have shown interest in this product.</span>
-              <p>Seller: {{interest.2}}</p>
+              <p>Seller: {{interest.3}}</p>
               <p>details about the ad/product</p>
               <p>details about the ad/product</p>
               <span class="response101">Interest Accepted</span>
@@ -97,7 +98,7 @@
             <span class="container101">
               <img class="interest_ad" src="static/common/logo_final_2.png">
               <span>You have shown interest in this product.</span>
-              <p>Seller: {{interest.2}}</p>
+              <p>Seller: {{interest.3}}</p>
               <p>details about the ad/product</p>
               <p>details about the ad/product</p>
               <span class="response101">Interest Rejected</span>
@@ -112,7 +113,7 @@
             <span class="container101">
               <img class="interest_ad" src="static/common/logo_final_2.png">
               <span>You have shown interest in this product.</span>
-              <p>Seller: {{interest.2}}</p>
+              <p>Seller: {{interest.3}}</p>
               <p>details about the ad/product</p>
               <p>details about the ad/product</p>
               <span class="response101">Waiting for Response</span>
@@ -121,11 +122,13 @@
       </span>
     {% endif %}
   {% endfor %}
+  {% endif %}
   {% endwith %}
 </div>
 
 <div class="interest_cards tabcontent" id="received">
   {% with interest_received_list=interest_received %}
+  {% if interest_received_list|length > 0 %}
   {% for interest in interest_received_list %}
     {% if interest.0 == 1 %}
       <span class="row">
@@ -134,7 +137,7 @@
             <span class="container101">
               <img class="interest_ad" src="static/common/logo_final_2.png">
               <span>You have received an interest in this product.</span>
-              <p>Buyer: {{interest.2}}</p>
+              <p>Buyer: {{interest.3}}</p>
               <p>details about the ad/product</p>
               <p>details about the ad/product</p>
               <span class="response101">Interest Accepted</span>
@@ -149,7 +152,7 @@
             <span class="container101">
               <img class="interest_ad" src="static/common/logo_final_2.png">
               <span>You have received an interest in this product.</span>
-              <p>Buyer: {{interest.2}}</p>
+              <p>Buyer: {{interest.3}}</p>
               <p>details about the ad/product</p>
               <p>details about the ad/product</p>
               <span class="response101">Interest Rejected</span>
@@ -164,18 +167,19 @@
             <span class="container101">
               <img class="interest_ad" src="static/common/logo_final_2.png">
               <span>You have received an interest in this product.</span>
-              <p>Buyer: {{interest.2}}</p>
+              <p>Buyer: {{interest.3}}</p>
               <p>details about the ad/product</p>
               <p>details about the ad/product</p>
               <span>
-                <button type="button" onclick="changeStatus(event,'accepted',{{uid}},{{interest.3}},{{interest.1}},'{{interest.2}}')">Accept</button>
-                <button type="button" onclick="changeStatus(event,'rejected',{{uid}},{{interest.3}},{{interest.1}},'{{interest.2}}')"> Decline</button>
+                <button type="button" onclick="changeStatus(event,'accepted',{{uid}},{{interest.4}},{{interest.2}})">Accept</button>
+                <button type="button" onclick="changeStatus(event,'rejected',{{uid}},{{interest.4}},{{interest.2}})"> Decline</button>
               </span>
           </div>
         </div>
       </span>
     {% endif %}
   {% endfor %}
+  {% endif %}
   {% endwith %}
 </div>
 

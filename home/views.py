@@ -75,14 +75,14 @@ def interests_page(request):
         for i in interest_shown.keys():
             shownName=db.child("userId").child(interest_shown[i][2]).get()
             fullName=shownName.val()["fName"]+" "+shownName.val()["lName"]
-            interest_shown[i][2]=fullName
+            interest_shown[i].append(fullName)
             interest_shown[i].append(i)
         interest_shown=list(interest_shown.values())
 
         for i in interest_received.keys():
             receivedName=db.child("userId").child(interest_received[i][2]).get()
             fullName=receivedName.val()["fName"]+" "+receivedName.val()["lName"]
-            interest_received[i][2]=fullName
+            interest_received[i].append(fullName)
             interest_received[i].append(i)
         interest_received=list(interest_received.values())
         context={}
