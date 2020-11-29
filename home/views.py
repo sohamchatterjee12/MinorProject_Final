@@ -65,12 +65,10 @@ def interests_page(request):
         
         interest_shown=interest_shown_response.val()
         interest_received=interest_received_response.val()
-        #interest_shown_keys=list(interest_shown_keys_response.val())
-        #interest_received_keys=list(interest_received_keys_response.val())
-        #print(interest_shown)
-        #print(interest_received)
-        #print(interest_shown_keys)
-        #print(interest_received_keys)
+
+        print(interest_shown)
+        print(interest_received)
+
         
         for i in interest_shown.keys():
             shownName=db.child("userId").child(interest_shown[i][2]).get()

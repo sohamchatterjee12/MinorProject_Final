@@ -65,7 +65,7 @@ function call(id, uid) {
             var upperDiv = document.createElement("div");
             upperDiv.className = "message-data";
             var newSpan = document.createElement("span");
-            newSpan.innerHTML = new Date(data2[newLength][1]).toISOString() + chatWith;
+            newSpan.innerHTML = new Date(data2[newLength][1]) + chatWith;
             newSpan.style.color = "white";
             var newDiv = document.createElement("div");
             newListItem.appendChild(upperDiv);
@@ -86,12 +86,13 @@ function call(id, uid) {
 
 function gotData(data){
     var tempData = data.val();
-
+    console.log(tempData);
     var keys = Object.keys(tempData);
     
     for(var i = 0; i < keys.length; i++){
         var k = keys[i];
         combinedMessages.push(tempData[k]);
+        
     }
     count++;
     if(count === 2){
@@ -131,7 +132,7 @@ function call2(combinedMessages){
 
             var upperDiv = document.createElement("div");
             var newSpan = document.createElement("span");
-            newSpan.innerHTML = new Date(combinedMessages[i][1]).toISOString()  + ", " + myName;
+            newSpan.innerHTML = new Date(combinedMessages[i][1]) + ", " + myName;
             newSpan.style.color = "white";
             upperDiv.className = "message-data align-right";
             var newDiv = document.createElement("div");
@@ -148,7 +149,7 @@ function call2(combinedMessages){
             var upperDiv = document.createElement("div");
             upperDiv.className = "message-data";
             var newSpan = document.createElement("span");
-            newSpan.innerHTML = new Date(combinedMessages[i][1]).toISOString() + ", " + chatWith;
+            newSpan.innerHTML = new Date(combinedMessages[i][1]) + ", " + chatWith;
             newSpan.style.color = "white";
             var newDiv = document.createElement("div");
             newListItem.appendChild(upperDiv);

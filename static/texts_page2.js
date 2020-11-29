@@ -10,7 +10,7 @@ function send(){
     });
 
     size = size + 1;
-    firebase.database().ref("/messages").child(uid).child(id).child(size).set({
+    firebase.database().ref("/messages").child(uid).child(id).push({
         0 : message,
         1 : Date.now(),
         2 : uid
@@ -23,7 +23,7 @@ function send(){
 
     var upperDiv = document.createElement("div");
     var newSpan = document.createElement("span");
-    newSpan.innerHTML = new Date().toISOString() + ", " + globalVar.myName;
+    newSpan.innerHTML = new Date() + ", " + globalVar.myName;
     newSpan.style.color = "white";
     upperDiv.className = "message-data align-right";
     var newDiv = document.createElement("div");

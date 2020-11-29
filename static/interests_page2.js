@@ -11,7 +11,7 @@ function changeStatus(evt, status, uid, parentKey,showerId) {
     console.log(parentKey)
     var received_interestToChange=firebase.database().ref("/interests_received").child(uid).child(parentKey);
     var shown_interestToChange=firebase.database().ref("/interests_shown").child(showerId).child(parentKey);
-
+    //var add_msg_Received=firebase.database().ref("/messages");
     if (status=="accepted") 
     {
         newspanItem.innerHTML="Interest Accepted";
@@ -22,7 +22,19 @@ function changeStatus(evt, status, uid, parentKey,showerId) {
         shown_interestToChange.update({
             0:1,
         });
+        console.log(typeof uid)
+        console.log(uid)
+        firebase.database().ref("/messages").child(uid).child(showerId).push({
+            0:"You can chat with me now (This is an auto generated message)",
+            1:Date.now(),
+            2:uid
+        });
 
+        firebase.database().ref("/messages").child(showerId).child(uid).push({
+            0:"You can chat with me now (This is an auto generated message)",
+            1:Date.now(),
+            2:showerId
+        });
         
     }
     else {
