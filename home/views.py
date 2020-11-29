@@ -60,30 +60,31 @@ def interests_page(request):
     if request.session.is_empty() == False:
         interest_shown_response = db.child("interests_shown").child(request.session["uid"]).get() 
         interest_received_response = db.child("interests_received").child(request.session["uid"]).get() 
-        interest_shown_keys_response=db.child("interests_shown").child(request.session["uid"]).shallow().get()
-        interest_received_keys_response=db.child("interests_received").child(request.session["uid"]).shallow().get() 
+        #interest_shown_keys_response=db.child("interests_shown").child(request.session["uid"]).shallow().get()
+        #interest_received_keys_response=db.child("interests_received").child(request.session["uid"]).shallow().get() 
         
         interest_shown=interest_shown_response.val()
         interest_received=interest_received_response.val()
-        interest_shown_keys=list(interest_shown_keys_response.val())
-        interest_received_keys=list(interest_received_keys_response.val())
+        #interest_shown_keys=list(interest_shown_keys_response.val())
+        #interest_received_keys=list(interest_received_keys_response.val())
+        #print(interest_shown)
+        #print(interest_received)
+        #print(interest_shown_keys)
+        #print(interest_received_keys)
         
-        count=0
-        for i in interest_shown:
-            shownName=db.child("userId").child(i[2]).get()
+        for i in interest_shown.keys():
+            shownName=db.child("userId").child(interest_shown[i][2]).get()
             fullName=shownName.val()["fName"]+" "+shownName.val()["lName"]
-            print(fullName)
-            i[2]=fullName
-            i.append(int(interest_shown_keys[count]))
-            count+=1
-        count=0
-        for i in interest_received:
-            receivedName=db.child("userId").child(i[2]).get()
+            interest_shown[i][2]=fullName
+            interest_shown[i].append(i)
+        interest_shown=list(interest_shown.values())
+
+        for i in interest_received.keys():
+            receivedName=db.child("userId").child(interest_received[i][2]).get()
             fullName=receivedName.val()["fName"]+" "+receivedName.val()["lName"]
-            print(fullName)
-            i[2]=fullName
-            i.append(int(interest_received_keys[count]))
-            count+=1
+            interest_received[i][2]=fullName
+            interest_received[i].append(i)
+        interest_received=list(interest_received.values())
         context={}
         context["interest_shown"]=interest_shown
         context["interest_received"]=interest_received
