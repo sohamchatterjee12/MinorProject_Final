@@ -23,7 +23,7 @@ function send(){
 
     var upperDiv = document.createElement("div");
     var newSpan = document.createElement("span");
-    newSpan.innerHTML = new Date().replace(" GMT+0530 (India Standard Time)","") + ", " + globalVar.myName;
+    newSpan.innerHTML = new Date() + ", " + globalVar.myName;
     newSpan.style.color = "white";
     upperDiv.className = "message-data align-right";
     var newDiv = document.createElement("div");

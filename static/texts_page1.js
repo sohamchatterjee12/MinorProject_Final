@@ -51,12 +51,16 @@ function call(id, uid) {
         var check2 = firebase.database().ref("/messages").child(id).child(uid);
         var newLength = 0;
         var data2;
+        var data2_keys;
         check2.on('value', (snapshot) =>{
             data2 = snapshot.val();
-            newLength = data2.length - 1
+            data2_keys=Object.keys(data2)
+            newLength = data2_keys.length;
         });
 
-        var newMsg = data2[newLength][0];
+        lastKey=data2_keys[newLength - 1];
+        var newMsg = data2[lastKey][0];
+        console.log(newMsg);
         
         if(newLength > prevLength && currid==id){
 
@@ -65,7 +69,7 @@ function call(id, uid) {
             var upperDiv = document.createElement("div");
             upperDiv.className = "message-data";
             var newSpan = document.createElement("span");
-            newSpan.innerHTML = String(new Date(data2[newLength][1])).replace(" GMT+0530 (India Standard Time)","") + chatWith;
+            newSpan.innerHTML = new Date(data2[lastKey][1]) + chatWith;
             newSpan.style.color = "white";
             var newDiv = document.createElement("div");
             newListItem.appendChild(upperDiv);
@@ -132,7 +136,7 @@ function call2(combinedMessages){
 
             var upperDiv = document.createElement("div");
             var newSpan = document.createElement("span");
-            newSpan.innerHTML = String(new Date(combinedMessages[i][1])).replace(" GMT+0530 (India Standard Time)","") + ", " + myName;
+            newSpan.innerHTML = new Date(combinedMessages[i][1]) + ", " + myName;
             newSpan.style.color = "white";
             upperDiv.className = "message-data align-right";
             var newDiv = document.createElement("div");
@@ -149,7 +153,7 @@ function call2(combinedMessages){
             var upperDiv = document.createElement("div");
             upperDiv.className = "message-data";
             var newSpan = document.createElement("span");
-            newSpan.innerHTML = String(new Date(combinedMessages[i][1])).replace(" GMT+0530 (India Standard Time)","") + ", " + chatWith;
+            newSpan.innerHTML = new Date(combinedMessages[i][1]) + ", " + chatWith;
             newSpan.style.color = "white";
             var newDiv = document.createElement("div");
             newListItem.appendChild(upperDiv);
