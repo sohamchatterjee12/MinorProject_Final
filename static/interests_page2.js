@@ -1,4 +1,4 @@
-function changeStatus(evt, status, uid, parentKey,showerId) {
+function changeStatus(evt, status, uid, parentKey,showerId,productId) {
     console.log(evt.currentTarget);
     var x = evt.currentTarget.parentElement;
     console.log(x);
@@ -35,6 +35,19 @@ function changeStatus(evt, status, uid, parentKey,showerId) {
             1:Date.now(),
             2:showerId
         });
+
+        firebase.database().ref("/confirmations_shipped").child(uid).push({
+            0:0,
+            1:productId,
+            2:showerId
+        });
+
+        firebase.database().ref("/confirmations_received").child(showerId).push({
+            0:0,
+            1:productId,
+            2:uid
+        });
+
         
     }
     else {

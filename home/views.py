@@ -69,20 +69,26 @@ def interests_page(request):
         print(interest_shown)
         print(interest_received)
 
+        if interest_shown:
+            for i in interest_shown.keys():
+                shownName=db.child("userId").child(interest_shown[i][2]).get()
+                fullName=shownName.val()["fName"]+" "+shownName.val()["lName"]
+                interest_shown[i].append(fullName)
+                interest_shown[i].append(i)
+            interest_shown=list(interest_shown.values())
+        else:
+            interest_shown=None
         
-        for i in interest_shown.keys():
-            shownName=db.child("userId").child(interest_shown[i][2]).get()
-            fullName=shownName.val()["fName"]+" "+shownName.val()["lName"]
-            interest_shown[i].append(fullName)
-            interest_shown[i].append(i)
-        interest_shown=list(interest_shown.values())
-
-        for i in interest_received.keys():
-            receivedName=db.child("userId").child(interest_received[i][2]).get()
-            fullName=receivedName.val()["fName"]+" "+receivedName.val()["lName"]
-            interest_received[i].append(fullName)
-            interest_received[i].append(i)
-        interest_received=list(interest_received.values())
+        if interest_received:
+            for i in interest_received.keys():
+                receivedName=db.child("userId").child(interest_received[i][2]).get()
+                fullName=receivedName.val()["fName"]+" "+receivedName.val()["lName"]
+                interest_received[i].append(fullName)
+                interest_received[i].append(i)
+            interest_received=list(interest_received.values())
+        else:
+            interest_received=None
+            
         context={}
         context["interest_shown"]=interest_shown
         context["interest_received"]=interest_received
@@ -94,7 +100,44 @@ def interests_page(request):
 
 def confirmations_page(request):
     if request.session.is_empty() == False:
-        return render(request,'confirmations_page.html')
+        confirmations_shipped_response = db.child("confirmations_shipped").child(request.session["uid"]).get() 
+        confirmations_received_response = db.child("confirmations_received").child(request.session["uid"]).get() 
+        #interest_shown_keys_response=db.child("interests_shown").child(request.session["uid"]).shallow().get()
+        #interest_received_keys_response=db.child("interests_received").child(request.session["uid"]).shallow().get() 
+        
+        confirmations_shipped=confirmations_shipped_response.val()
+        confirmations_received=confirmations_received_response.val()
+
+        print(confirmations_shipped)
+        print(confirmations_received)
+
+        if confirmations_shipped:
+            for i in confirmations_shipped.keys():
+                shippedToName=db.child("userId").child(confirmations_shipped[i][2]).get()
+                fullName=shippedToName.val()["fName"]+" "+shippedToName.val()["lName"]
+                confirmations_shipped[i].append(fullName)
+                confirmations_shipped[i].append(i)
+            confirmations_shipped=list(confirmations_shipped.values())
+        else:
+            confirmations_shipped=None
+        print(confirmations_shipped)
+
+        if confirmations_received:
+            for i in confirmations_received.keys():
+                shippedFromName=db.child("userId").child(confirmations_received[i][2]).get()
+                fullName=shippedFromName.val()["fName"]+" "+shippedFromName.val()["lName"]
+                confirmations_received[i].append(fullName)
+                confirmations_received[i].append(i)
+            confirmations_received=list(confirmations_received.values())
+        else:
+            confirmations_received=None
+        print(confirmations_received)
+        context={}
+        context["confirmations_shipped"]=confirmations_shipped
+        context["confirmations_received"]=confirmations_received
+        context["uid"]=request.session["uid"]
+        print(context)
+        return render(request,'confirmations_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 
