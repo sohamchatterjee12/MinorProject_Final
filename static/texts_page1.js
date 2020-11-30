@@ -69,7 +69,7 @@ function call(id, uid) {
             var upperDiv = document.createElement("div");
             upperDiv.className = "message-data";
             var newSpan = document.createElement("span");
-            newSpan.innerHTML = new Date(data2[lastKey][1]) + chatWith;
+            newSpan.innerHTML = String(new Date(data2[lastKey][1])).replace("GMT+0530 (India Standard Time)","") + chatWith;
             newSpan.style.color = "white";
             var newDiv = document.createElement("div");
             newListItem.appendChild(upperDiv);
@@ -136,7 +136,7 @@ function call2(combinedMessages){
 
             var upperDiv = document.createElement("div");
             var newSpan = document.createElement("span");
-            newSpan.innerHTML = new Date(combinedMessages[i][1]) + ", " + myName;
+            newSpan.innerHTML = String(new Date(combinedMessages[i][1])).replace("GMT+0530 (India Standard Time)","") + ", " + myName;
             newSpan.style.color = "white";
             upperDiv.className = "message-data align-right";
             var newDiv = document.createElement("div");
@@ -153,7 +153,7 @@ function call2(combinedMessages){
             var upperDiv = document.createElement("div");
             upperDiv.className = "message-data";
             var newSpan = document.createElement("span");
-            newSpan.innerHTML = new Date(combinedMessages[i][1]) + ", " + chatWith;
+            newSpan.innerHTML = String(new Date(combinedMessages[i][1])).replace("GMT+0530 (India Standard Time)","") + ", " + chatWith;
             newSpan.style.color = "white";
             var newDiv = document.createElement("div");
             newListItem.appendChild(upperDiv);
