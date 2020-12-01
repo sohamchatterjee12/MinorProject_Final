@@ -1,4 +1,4 @@
-function changeStatus(evt, status, uid, parentKey,showerId,productId) {
+function changeStatus(evt, status, uid, parentKey,tofromId,productId) {
     console.log(evt.currentTarget);
     var x = evt.currentTarget.parentElement;
     console.log(x);
@@ -12,7 +12,7 @@ function changeStatus(evt, status, uid, parentKey,showerId,productId) {
         firebase.database().ref("/confirmations_shipped").child(uid).child(parentKey).update({
             0:1
         });
-
+        
     }
     else if (status=="not_shipped") {
 
@@ -26,6 +26,8 @@ function changeStatus(evt, status, uid, parentKey,showerId,productId) {
         firebase.database().ref("/confirmations_received").child(uid).child(parentKey).update({
             0:1
         });
+
+        shipped_status=firebase.database().ref("/confirmations_shipped").child(uid).child(parentKey).child("0")
     }
     else {
 
@@ -33,7 +35,5 @@ function changeStatus(evt, status, uid, parentKey,showerId,productId) {
             0:-1
         });
     }
-
-   
 
 }

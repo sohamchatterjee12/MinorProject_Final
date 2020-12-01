@@ -36,19 +36,34 @@ function changeStatus(evt, status, uid, parentKey,showerId,productId) {
             2:showerId
         });
 
-        firebase.database().ref("/confirmations_shipped").child(uid).push({
+        var confirmation_count_response=firebase.database().ref("/count").child("confirmations")
+        
+        confirmation_count_response.once('value', (snapshot) =>{
+
+
+            const data = snapshot.val();
+            var confirmation_id='"'+String(data+1)+'"';
+            console.log(confirmation_id)
+
+        firebase.database().ref("/confirmations_shipped").child(uid).child(confirmation_id).set({
             0:0,
             1:productId,
             2:showerId
         });
 
-        firebase.database().ref("/confirmations_received").child(showerId).push({
+        firebase.database().ref("/confirmations_received").child(showerId).child(confirmation_id).set({
             0:0,
             1:productId,
             2:uid
         });
 
-        
+        firebase.database().ref("/count").update({
+            confirmations:data+1
+        })
+
+        });
+
+
     }
     else {
 
