@@ -50,6 +50,14 @@
         <a href="require_service">Render Service</a>
       </div>
     </div>
+    <div class="dropdown" id="screenSizeChange">
+      <span class="navbar-brand mb-0 h1"> Hi , {{user_name}}</span>
+      <div class="dropdown-content">
+        <a href="account_details">Account Details</a>
+        <a href="all_transactions">All Transactions</a>
+        <a href="logout">Logout</a>
+      </div>
+    </div>
   </div>
 
 
@@ -140,5 +148,15 @@
   {% endif %}
   {% endwith %} 
 </div>
-  <!--confirmations-->
+  
+<script>
+    function changePaddingLeft(screenSize){
+      if(screenSize.matches){
+        document.getElementById("screenSizeChange").style.paddingLeft = "550px";
+      }
+    }
+    var screenSize = window.matchMedia("(min-width: 1300px)")
+    changePaddingLeft(screenSize) // Call listener function at run time
+    screenSize.addListener(changePaddingLeft) // Attach listener function on state changes
+  </script>
 </body>

@@ -65,7 +65,8 @@ min-width:144.94px
 }
 #left{
     float:left;
-    padding-left:10%;
+    margin-left:10%;
+    border: 8px solid #6c757d;
 }
 #dp {
     

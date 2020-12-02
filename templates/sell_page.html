@@ -7,46 +7,53 @@
 <link rel="stylesheet" href="static\sell_page.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
-    <a class="navbar-brand" href="#" id="image_container">
-    <img src="static/common/logo_final_2.png" width="120" height="60" loading="lazy" alt="404">
+<div class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
+    <a class="navbar-brand" href="contributors" id="image_container">
+      <img src="static/common/logo_final_2.png" width="120" height="60" loading="lazy" alt="404">
     </a>
-  <div class="dropdown">
-    <span class="navbar-brand mb-0 h1">Social</span>
-    <div class="dropdown-content">
-      <a href="#">Texts</a>
-      <a href="#">Interests</a>
-      <a href="#">Confirmations</a>
+    <div class="dropdown">
+      <span class="navbar-brand mb-0 h1">Social</span>
+      <div class="dropdown-content">
+        <a href="texts">Texts</a>
+        <a href="interests">Interests</a>
+        <a href="confirmations">Confirmations</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <span class="navbar-brand mb-0 h1">Goods</span>
+      <div class="dropdown-content">
+        <a href="buy">Buy</a>
+        <a href="sell">Sell</a>
+        <a href="rent">Rent</a>
+        <a href="lease">Lease</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <span class="navbar-brand mb-0 h1">Services</span>
+      <div class="dropdown-content">
+        <a href="render_service">Request Service</a>
+        <a href="require_service">Render Service</a>
+      </div>
+    </div>
+    <div class="dropdown" id="screenSizeChange">
+      <span class="navbar-brand mb-0 h1"> Hi , {{user_name}}</span>
+      <div class="dropdown-content">
+        <a href="account_details">Account Details</a>
+        <a href="all_transactions">All Transactions</a>
+        <a href="logout">Logout</a>
+      </div>
     </div>
   </div>
-  <div class="dropdown">
-    <span class="navbar-brand mb-0 h1">Goods</span>
-    <div class="dropdown-content">
-      <a href="#">Buy</a>
-      <a href="#">Sell</a>
-      <a href="#">Rent</a>
-      <a href="#">Lease</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <span class="navbar-brand mb-0 h1">Services</span>
-    <div class="dropdown-content">
-      <a href="#">Request Service</a>
-      <a href="#">Render Service</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <span class="navbar-brand mb-0 h1">Accounts</span>
-    <div class="dropdown-content">
-      <a href="#">Account Details</a>
-      <a href="#">All Transactions</a>
-    </div>
-  </div>
-</nav>
+
+
 
 <!--seller ads-->
 <div class="ads_shown" id="ads">
-
+<span>
+  <h2  id="create_ad">Create a new AD      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="button_create">
+    Create AD
+  </button></h2>
+</span>
  <span class="row">
         <div class="column">
           <div class="card">
@@ -66,11 +73,6 @@
 
 
 <div class="container" id="create_ad">
-  <h2>Create a new AD</h2>
-  <!-- Button to Open the Modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="button_create">
-    Create AD
-  </button>
 
   <!-- The Modal -->
   <div class="modal fade" id="myModal">
@@ -137,6 +139,15 @@
 
 
 
-
+<script>
+    function changePaddingLeft(screenSize){
+      if(screenSize.matches){
+        document.getElementById("screenSizeChange").style.paddingLeft = "550px";
+      }
+    }
+    var screenSize = window.matchMedia("(min-width: 1300px)")
+    changePaddingLeft(screenSize) // Call listener function at run time
+    screenSize.addListener(changePaddingLeft) // Attach listener function on state changes
+  </script>
 
 </body>

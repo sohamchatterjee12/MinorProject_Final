@@ -81,7 +81,9 @@ body {
         background-color: #fcfcfc00;
         color:white;
     }
-
+    .Search:focus{
+      outline-width: 0;
+    }
 
 /*styling ad card*/
 

@@ -93,6 +93,7 @@ def interests_page(request):
         context["interest_shown"]=interest_shown
         context["interest_received"]=interest_received
         context["uid"]=request.session["uid"]
+        context["user_name"]=request.session["fName"]
         print(context)
         return render(request,'interests_page.html',context)
     else:
@@ -136,6 +137,7 @@ def confirmations_page(request):
         context["confirmations_shipped"]=confirmations_shipped
         context["confirmations_received"]=confirmations_received
         context["uid"]=request.session["uid"]
+        context["user_name"]=request.session["fName"]
         print(context)
         return render(request,'confirmations_page.html',context)
     else:
@@ -143,25 +145,33 @@ def confirmations_page(request):
 
 def buy_page(request):
     if request.session.is_empty() == False:
-        return render(request,'buy_page.html')
+        context={}
+        context["user_name"]=request.session["fName"]
+        return render(request,'buy_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 
 def sell_page(request):
     if request.session.is_empty() == False :
-        return render(request,'sell_page.html')
+        context={}
+        context["user_name"]=request.session["fName"]
+        return render(request,'sell_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 
 def rent_page(request):
     if request.session.is_empty() == False :
-        return render(request,'rent_page.html')
+        context={}
+        context["user_name"]=request.session["fName"]
+        return render(request,'rent_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 
 def lease_page(request):
     if request.session.is_empty() == False :
-        return render(request,'lease_page.html')
+        context={}
+        context["user_name"]=request.session["fName"]
+        return render(request,'lease_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 
@@ -182,6 +192,7 @@ def account_details_page(request):
         context = {
             "fullName" : request.session["fName"] + " "+request.session["lName"],
             "eMail" : request.session["email"],
+            "user_name":request.session["fName"]
         }
         return render(request,'account_details_page.html', context)
     else:
@@ -203,6 +214,7 @@ def all_transactions_page(request):
             transaction_details_list = None
         print(transaction_details_list)
         context["transaction_details_list"] = transaction_details_list
+        context["user_name"]=request.session["fName"]
         # print(transaction_details_list)
         return render(request,'all_transactions_page.html', context)
     else:
