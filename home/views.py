@@ -179,13 +179,32 @@ def require_service_page(request):
 
 def account_details_page(request):
     if request.session.is_empty() == False :
-        return render(request,'account_details_page.html')
+        context = {
+            "fullName" : request.session["fName"] + " "+request.session["lName"],
+            "eMail" : request.session["email"],
+        }
+        return render(request,'account_details_page.html', context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 
 def all_transactions_page(request):
     if request.session.is_empty() == False :
-        return render(request,'all_transactions_page.html')
+        transaction_details_response = db.child("all_transactions").child(request.session["uid"]).get()
+        transaction_details = transaction_details_response.val()
+        # print(transaction_details)
+        context = {}
+        if transaction_details:
+            for i in transaction_details.keys():
+                to_from_name=db.child("userId").child(transaction_details[i][2]).get()
+                fullName=to_from_name.val()["fName"]+" "+to_from_name.val()["lName"]
+                transaction_details[i][2] = fullName
+            transaction_details_list = list(transaction_details.values())
+        else:
+            transaction_details_list = None
+        print(transaction_details_list)
+        context["transaction_details_list"] = transaction_details_list
+        # print(transaction_details_list)
+        return render(request,'all_transactions_page.html', context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 
@@ -281,7 +300,9 @@ def landing_page(request):
 
 def home_page(request):    
     if request.session.is_empty() == False:
-        return render(request,'home_page.html')
+        context={}
+        context["user_name"]=request.session["fName"]
+        return render(request,'home_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 
@@ -378,7 +399,7 @@ def login(request):
                 request.session["uid"] = userDB.val()["userId"]
                 userIdDB = db.child("userId").child(request.session["uid"]).get()
                 user["displayName"] = userIdDB.val()["fName"]
-                # request.session["email"] = email
+                request.session["email"] = email
                 request.session["fName"] = userIdDB.val()["fName"]
                 request.session["lName"] = userIdDB.val()["lName"]
                 # request.session["tempEmail"] = tempEmail
@@ -411,35 +432,8 @@ def login(request):
             }
             return landing_page_with_context(request, context)
 
-def test(request):
-    # print(request.session["uid"])
-    msgs1 = db.child("messages").child(request.session["uid"]).shallow().get()
-    # msgs2 = db.child("messages").child("2").child("1").get()
-    # print(type(msgs))
-    # print(msgs1.val())
-    messages1 = list(msgs1.val())
-    names = []
-    for userid in messages1:
-        eachName = db.child("userId").child(userid).get()
-        names.append([eachName.val()["fName"], userid])
-    # print(type(messages1))
-    # print(messages1)
+def contributors(request):
+    return render(request,"contributors.html")
 
-    # tempMsg1 = list(messages1.values())
-    # tempMsg2 = list(messages2.values())
 
-    # tempMsg = tempMsg1
-    # tempMsg.sort(key = lambda x : x[1])
-
-    # tempMsg = [x[0] for x in tempMsg]
-    # print(tempMsg)
-    # x = tuple(tempMsg[0])
-    # print(x[1])
-
-    context = {}
-    # context["messages"] = messages?
-    context["names"] = names
-    # print(type(tempMsg))
-    # print(messages)
-    return render(request,"testTemplate.html")
 

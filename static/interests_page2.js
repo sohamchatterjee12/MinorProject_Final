@@ -51,11 +51,6 @@ function changeStatus(evt, status, uid, parentKey,showerId,productId) {
             2:showerId
         });
 
-        firebase.database().ref("/confirmations_received").child(showerId).child(confirmation_id).set({
-            0:0,
-            1:productId,
-            2:uid
-        });
 
         firebase.database().ref("/count").update({
             confirmations:data+1
