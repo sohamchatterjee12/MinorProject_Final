@@ -1,6 +1,6 @@
 function upload(uid){
     const ref=firebase.storage().ref();
-    const file=document.getElementById("inputGroupFile01").files[0];
+    const file=document.getElementById("customFile").files[0];
     console.log(file)
     const name=new Date()+'-'+file.name;
     const metaData={
@@ -15,5 +15,10 @@ function upload(uid){
     })
 
 
-    
+    var title=document.getElementById("title")
+    var description=document.getElementById("description")
+    var price=document.getElementById("price")
+    title.value="";
+    description.value="";
+    price.value="";
 }
