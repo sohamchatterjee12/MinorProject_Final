@@ -155,6 +155,7 @@ def sell_page(request):
     if request.session.is_empty() == False :
         context={}
         context["user_name"]=request.session["fName"]
+        context["uid"]=request.session["uid"]
         return render(request,'sell_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
