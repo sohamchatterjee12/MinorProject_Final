@@ -448,5 +448,9 @@ def login(request):
 def contributors(request):
     return render(request,"contributors.html")
 
+def ad_page(request):
+    return render(request,"ad_page.html")    
+
+
 
 

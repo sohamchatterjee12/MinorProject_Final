@@ -22,6 +22,7 @@ urlpatterns = [
     path("forgot_password", views.forgot_password, name="forgot_password"),
     path("logout", views.logout, name="logout"),
     path("login", views.login, name="login"),
-    path("contributors", views.contributors, name="contributors")
+    path("contributors", views.contributors, name="contributors"),
+    path("ad_page", views.ad_page, name="ad_page")
 
 ]
