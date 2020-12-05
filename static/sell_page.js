@@ -20,10 +20,18 @@ function upload(uid,full_name){
             2:full_name,
             3:url,
             4:price.value
-        });
+        })
+        .then((snap) => {
+            const key = snap.key 
+            console.log(key);
+            firebase.database().ref("/titles").child(document.getElementById("title").value.toLowerCase()).push({
+                0:uid,
+                1:key
+            });
         title.value="";
         description.value="";
         price.value="";
+         });
     });
 
 }

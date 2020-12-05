@@ -5,6 +5,22 @@
 
 </head>
 <body>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAXwgisDN7kx6BMZCIwYjj8KNDgmJuz1Mg",
+      authDomain: "exampledjango-4af38.firebaseapp.com",
+      databaseURL: "https://exampledjango-4af38.firebaseio.com",
+      projectId: "exampledjango-4af38",
+      storageBucket: "exampledjango-4af38.appspot.com",
+      messagingSenderId: "476609483924",
+      appId: "1:476609483924:web:14a07bf9950ed344809081",
+      measurementId: "G-Q8RNK0P4KT"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    //console.log(firebase.storage)
+  </script>
+  <script type="text/javascript" src="static/buy_page1.js"></script>
 <div class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
     <a class="navbar-brand" href="#" id="image_container">
       <img src="static/common/logo_final_2.png" width="120" height="60" loading="lazy" alt="404">
@@ -52,9 +68,7 @@
       <input type="text" placeholder="Search Item" class="Search">
       </td>
       <td>
-     <a class="search_db" href="#" id="search_bttn">
-    <img src="static/common/sbttn.png" width="40" height="30">
-    </a>
+    <img src="static/common/sbttn.png" id="search_bttn" onclick="search_clicked()" width="40" height="30">
       </td>
       </tr>
     </table>
@@ -64,16 +78,16 @@
 
 <div class="ads_shown" id="ads">
 
- <span class="row">
+  <span class="row">
         <div class="column">
           <div class="card">
             <span class="container101">
               <img class="buy_ad" src="static/common/logo_final_2.png">
-              <span>########################</span>
-              <p>details about the ad/product</p>
-            <span>
-                <button type="button" onclick="#">See AD</button>
-            </span>
+              <h3>Title</h3>
+              <p>Description</p>
+              <h6>Price : ₹ </h6>
+              <h6><strong>Seller : </strong></h6>
+              <a href="ad_page"><button type="button" onclick="#">See AD</button></a>
           </div>
         </div>
   </span>
