@@ -3,27 +3,26 @@ body {
     background-image: url('common/page_bg.jpg');
     height: 100vh;
     }
-    #soham {
+  #soham {
     background-image: url("common/page_bg.jpg");
     -webkit-box-shadow: 3px 43px 87px 21px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 43px 87px 21px rgba(0,0,0,0.75);
     box-shadow: 3px 43px 87px 21px rgba(0,0,0,0.75);
     }
-    
-    #right {
+  #right {
     float: right;
-    }
-    
-    #image_container {
+  }
+  
+  #image_container {
       padding-right: 40px;
-    }  
-    
-    span {
+  }  
+  
+   span {
     margin: 0px!important;
     text-align:center;
     min-width:144.94px
-    }
-    
+  }
+   
     .dropdown {
       position: relative;
       align-items: center;
@@ -55,110 +54,94 @@ body {
       display: block;
       min-width:144.94px
     }
-    
-    
-    
-    .card {
-    width:150%;
-    height:auto;
-    margin:10px;
-    
+
+    .boxcontainer
+    {
+        margin-left:40%;
+        position: relative;
+        width: 300px;
+        height: 42px;
+        border:4px solid #297fb94b;
+        padding: 0px 10px;
+        border-radius: 50px;
+        
+    }
+
+    .elementcontainer{
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+
+    }
+
+    .search
+    {
+        border:none;
+        height:100%;
+        background-color: #fcfcfc00;
+        color:white;
+    }
+    .Search:focus{
+      outline-width: 0;
+    }
+
+/*styling ad card*/
+
+
+.card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: 100px;
-    right:20px;
+    margin: 10px;
+    right:-50px;
     text-align: center;
     color:white;
     font-family: "Poppins", sans-serif;
-    
-    background-color: rgb(48, 47, 47);
-    
-    border: 6px solid rgb(116, 116, 116);
-    
-    
-    -webkit-box-shadow: 3px 43px 87px 21px rgba(0,0,0,0.75);
-    -moz-box-shadow: 3px 43px 87px 21px rgba(0,0,0,0.75);
-    box-shadow: 3px 43px 87px 21px rgba(0, 0, 0, 0.884);
-    
-    
-    }
-    .column {
-    
+  
+ background-color: rgb(48, 47, 47);
+  }
+  .column {
+  
     width: 60%;
     padding: 0 10px;
-    }
-    
-    
-    .row {margin: 0 -5px;}
-    
-    
-    .row:after {
+  }
+  
+  
+  .row {margin: 0 -5px;}
+  
+  
+  .row:after {
     content: "";
     display: table;
     clear: both;
-    }
-    
-    .heading_interest{
-    
+  }
+
+  .heading_interest{
+ 
     
     color: rgb(255, 255, 255);
     font-family: "Poppins", sans-serif;
-    }
-    
-    button{
+  }
+
+  button{
     width: max-content;
     background-color: rgb(145 145 145);
     color:white;
-    }
-    .no-click {
+  }
+  .no-click {
     pointer-events: none;
-    }
-    
-     .ad_image
-    {
-    width: 30%;
-    border: 5px solid rgb(56, 54, 54);
-    float: left;
-    
-    
-    
-    box-shadow: 3px 43px 87px 21px rgba(14, 13, 13, 0.438);
-    
-    } 
-    
-    
-    .response101 {
-    background-color: rgb(134, 133, 133);
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    font-size: large;
-    }
-    
-    .container101 {
-    padding:15px
-    }
-    
-    
-    
-    .button {
-    background-color: #666966; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    width: 100%;
-    border: 3px solid rgb(199, 191, 191);
-    
-    }
-    
-    .desc_ad
-    {
-      
-    }
-    
+}
+
+  .buy_ad
+  {
+    width: 25%;
+    border: 5px solid #555;
+    margin-top: 10px;
+    margin-left:30px;
+    float:left
+  }
+
+  .container101 {
+      padding:15px
+  }
+
+
+  

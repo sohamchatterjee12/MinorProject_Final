@@ -55,7 +55,11 @@ body {
     min-width:144.94px
   }
 
+  
+
   /* grid layout configuration */
+
+
  #image {
   object-fit: cover;
   width: 100%;

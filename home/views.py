@@ -50,6 +50,7 @@ def texts_page(request):
         # context["messages"] = messages?
         context["names"] = names
         context["uid"] = request.session["uid"]
+        context["user_name"] = request.session["fName"]
         # print(type(tempMsg))
         # print(messages)
         return render(request,"texts_page.html", context)
@@ -153,9 +154,18 @@ def buy_page(request):
 
 def sell_page(request):
     if request.session.is_empty() == False :
+        items_response=db.child("sell").child(request.session["uid"]).get()
+        items=items_response.val()
+        if items:
+            items_list=list(items.values())
+        else:
+            items_list=None
+        full_name=request.session["fName"]+" "+request.session["lName"]
         context={}
+        context["items"]=items_list
         context["user_name"]=request.session["fName"]
         context["uid"]=request.session["uid"]
+        context["full_name"]=full_name
         return render(request,'sell_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
@@ -446,11 +456,16 @@ def login(request):
             return landing_page_with_context(request, context)
 
 def contributors(request):
-    return render(request,"contributors.html")
-
+    if request.session.is_empty() == False:
+        return render(request,"contributors.html")
+    else:
+        return landing_page_with_context(request, {'first_login' : True})
 def ad_page(request):
-    return render(request,"ad_page.html")    
-
-
+    if request.session.is_empty() == False:
+        context={}
+        context["user_name"] = request.session["fName"]
+        return render(request,"ad_page.html", context)   
+    else:
+        return landing_page_with_context(request, {'first_login' : True})
 
 

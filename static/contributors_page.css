@@ -37,7 +37,8 @@ top:10%;
 
 #logo {
     width: 15%;
-    height:15%
+    height:15%;
+    margin-top:10px
 }
     
 
@@ -81,4 +82,9 @@ border-radius: 70%;
     
 .grid-item:hover .overlay {
 opacity: 1;
+}
+
+#teamLogo {
+
+
 }

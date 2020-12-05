@@ -54,7 +54,7 @@
   </div>
   {% with transaction_details_list=transaction_details_list %}
   {% if transaction_details_list|length > 0 %}
-  {% for transaction in transaction_details_list %}
+  {% for transaction in transaction_details_list reversed %}
   {% if transaction.3 is 1 %}  <!-- 1 is buy-->
   <span class="row">
     <div class="column">
@@ -123,7 +123,7 @@
 <script>
     function changePaddingLeft(screenSize){
       if(screenSize.matches){
-        document.getElementById("screenSizeChange").style.paddingLeft = "550px";
+        document.getElementById("screenSizeChange").style.marginLeft = "550px";
       }
     }
     var screenSize = window.matchMedia("(min-width: 1300px)")

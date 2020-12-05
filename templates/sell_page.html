@@ -1,3 +1,5 @@
+<!DOCTYPE HTML>
+<html>
 <head>
 <link rel="icon" href="static/common/logo_final_2.png" type="image/gif" sizes="16x16">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -27,7 +29,7 @@
   </script>
   <script type="text/javascript" src="static/sell_page.js"></script>
 <div class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
-    <a class="navbar-brand" href="contributors" id="image_container">
+    <a class="navbar-brand" href="home" id="image_container">
       <img src="static/common/logo_final_2.png" width="120" height="60" loading="lazy" alt="404">
     </a>
     <div class="dropdown">
@@ -69,23 +71,87 @@
 <!--seller ads-->
 <div class="ads_shown" id="ads">
 <span>
-  <h2  id="create_ad">Create a new AD      <button type="button" accept="image/*,.pdf" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="button_create">
+  <h2  id="create_ad">Create a new AD <button type="button" accept="image/*" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="button_create">
     Create AD
   </button></h2>
 </span>
- <span class="row">
+  {% with items_list=items %}
+  {% if items_list|length > 0 %}
+  {% for item in items_list reversed %}
+  <span class="row">
         <div class="column">
           <div class="card">
             <span class="container101">
-              <img class="buy_ad" src="static/common/logo_final_2.png">
-              <h3>Title</h3>
-              <p>Product Description</p>
-              <h6>Seller:</h6>
-              <button type="button" onclick="#">See AD</button>
+              <img class="buy_ad" src="{{item.3}}">
+              <h3>{{item.0}}</h3>
+              <p>{{item.1}}</p>
+              <h6>Price : ₹ {{item.4}}</h6>
+              <h6><strong>Seller : {{item.2}}</strong></h6>
+              <button type="button" id="myyBtn" onclick="clickHandler()">{{item.0}}</button>
           </div>
         </div>
   </span>
 
+<!-- The Modal -->
+<div id="myyModal" class="modal" >
+  <!-- Modal content -->
+  <div  id="mcontent">
+    <div  id="mheader">
+      <h2>{{item.0}}</h2>
+      <span class="cloose">&times;</span>
+    </div>
+    <div  id="mbody">
+            <span class="container101">
+              <img class="buy_ad" src="{{item.3}}">
+              <h3>{{item.0}}</h3>
+              <p>{{item.1}}</p>
+              <h6>Price : ₹ {{item.4}}</h6>
+              <h6><strong>Seller : {{item.2}}</strong></h6>
+    </div>
+    <div  id="mfooter">
+      <h3> </h3>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+{% comment %}  
+
+<!-- The Modal -->
+<div id="myyModal" class="modal myyModal" >
+  <!-- Modal content -->
+  <div class="modal-content" id="mcontent">
+    <div class="modal-header" id="mheader">
+      <h2>{{item.0}}</h2>
+      <span class="cloose">&times;</span>
+    </div>
+    <div class="modal-body" id="mbody">
+            <span class="container101">
+              <img class="buy_ad" src="{{item.3}}">
+              <h3>{{item.0}}</h3>
+              <p>{{item.1}}</p>
+              <h6>Price : ₹ {{item.4}}</h6>
+              <h6><strong>Seller : {{item.2}}</strong></h6>
+    </div>
+    <div class="modal-footer" id="mfooter">
+      <h3> </h3>
+    </div>
+  </div>
+
+</div>
+{% endcomment %}
+
+  
+
+
+
+
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
 </div>
 
 
@@ -104,20 +170,21 @@
         </div>
         
         <!-- Modal body -->
+        
         <div class="modal-body">
         <!--add title name-->
         <div class="input-group input-group-sm mb-3">
          <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
         </div>
-        <input type="text" id="title" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        <input type="text" id="title" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" autocomplete="off" required />
         </div>
         <!--ad description-->
         <div class="input-group">
         <div class="input-group-prepend">
         <span class="input-group-text">Description</span>
         </div>
-         <textarea class="form-control" id="description" aria-label="With textarea"></textarea>
+         <textarea class="form-control" id="description" aria-label="With textarea" autocomplete="off" required ></textarea>
          </div>
          <br>
         <!--price-->
@@ -125,7 +192,7 @@
         <div class="input-group-prepend">
         <span class="input-group-text">Price ₹</span>
         </div>
-        <input type="text" id="price" class="form-control" aria-label="Amount (to the nearest rupee)">
+        <input type="text" id="price" class="form-control" aria-label="Amount (to the nearest rupee)" autocomplete="off" required />
         </div>
         <br>
         <!--image upload-->
@@ -142,7 +209,7 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" onclick="upload('{{uid}}')" id="uploadclear" class="btn btn-danger" data-dismiss="modal">Upload</button>
+          <button type="button" onclick="upload('{{uid}}','{{full_name}}')" id="uploadclear" class="btn btn-danger" data-dismiss="modal">Upload</button>
         </div>
         
       </div>
@@ -162,7 +229,7 @@ $(".custom-file-input").on("change", function() {
 <script>
     function changePaddingLeft(screenSize){
       if(screenSize.matches){
-        document.getElementById("screenSizeChange").style.paddingLeft = "550px";
+        document.getElementById("screenSizeChange").style.marginLeft = "550px";
       }
     }
     var screenSize = window.matchMedia("(min-width: 1300px)")
@@ -170,4 +237,50 @@ $(".custom-file-input").on("change", function() {
     screenSize.addListener(changePaddingLeft) // Attach listener function on state changes
   </script>
 
+
+
+<script>
+
+function clickHandler() {
+      
+
+// Get the modal
+var modal = document.getElementById("myyModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myyBtn");
+
+console.log(btn.innerHTML);
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("cloose")[0];
+var y=span;
+var x=y.parentElement;
+
+//console.log(x);
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+    }
+
+
+
+</script>
+
 </body>
+</html>
