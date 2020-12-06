@@ -1,16 +1,18 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-<link rel="icon" href="static/common/logo_final_2.png" type="image/gif" sizes="16x16">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="icon" href="static/common/logo_final_2.png" type="image/gif" sizes="16x16">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
-<link rel="stylesheet" href="static\sell_page.css">
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+  <link rel="stylesheet" href="static\sell_page.css">
 </head>
+
 <body>
   <script>
     const firebaseConfig = {
@@ -28,7 +30,7 @@
     //console.log(firebase.storage)
   </script>
   <script type="text/javascript" src="static/sell_page.js"></script>
-<div class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
+  <div class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
     <a class="navbar-brand" href="home" id="image_container">
       <img src="static/common/logo_final_2.png" width="120" height="60" loading="lazy" alt="404">
     </a>
@@ -68,233 +70,235 @@
 
 
 
-<!--seller ads-->
-<div class="ads_shown" id="ads">
-<span>
-  <h2  id="create_ad">Create a new AD <button type="button" accept="image/*" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="button_create">
-    Create AD
-  </button></h2>
-</span>
-  {% with items_list=items %}
-  {% if items_list|length > 0 %}
-  {% for item in items_list reversed %}
-  <span class="row">
-        <div class="column">
-          <div class="card">
+  <!--seller ads-->
+  <div class="ads_shown" id="ads">
+    <span>
+      <h2 id="create_ad">Create a new AD <button type="button" accept="image/*" class="btn btn-primary"
+          data-toggle="modal" data-target="#myModal" id="button_create">
+          Create AD
+        </button></h2>
+    </span>
+    {% with items_list=items %}
+    {% if items_list|length > 0 %}
+    {% for item in items_list reversed %}
+    <span class="row">
+      <div class="column">
+        <div class="card">
+          <span class="container101">
+            <img class="buy_ad" src="{{item.3}}">
+            <h3>{{item.0}}</h3>
+            <p>{{item.1}}</p>
+            <h6>Price : ₹ {{item.4}}</h6>
+            <h6><strong>Seller : {{item.2}}</strong></h6>
+            <button type="button" id="myyBtn" onclick="clickHandler(event)">Edit Details</button>
+        </div>
+      </div>
+
+
+
+
+      <!-- The Modal -->
+      <div id="myyModal" class="modal">
+        <!-- Modal content -->
+        <div id="mcontent">
+          <div id="mheader">
+            <h2>Edit Details</h2>
+            <span class="cloose">&times;</span>
+          </div>
+          <div id="mbody">
             <span class="container101">
               <img class="buy_ad" src="{{item.3}}">
               <h3>{{item.0}}</h3>
               <p>{{item.1}}</p>
               <h6>Price : ₹ {{item.4}}</h6>
               <h6><strong>Seller : {{item.2}}</strong></h6>
-              <button type="button" id="myyBtn" onclick="clickHandler(event)">Edit Details</button>
+              <div id="divform">
+                <form action="/action_page.php">
+                  <label for="tile">Title</label>
+                  <input type="text" id="tile" name="title" placeholder="Title" required />
+
+                  <label for="desc">Description</label>
+                  <input type="text" id="desc" name="desc" placeholder="Description" required />
+
+
+                  <label for="price">Price</label>
+
+                  <input type="number" min="0.00" max="1000000000000.00" step="0.01" id="lname" name="lastname"
+                    placeholder="Price" required />
+
+                  <input type="submit" value="Save Changes">
+                </form>
+              </div>
+
+
+          </div>
+          <div id="mfooter">
+            <h3> </h3>
           </div>
         </div>
 
+      </div>
+    </span>
 
-
-  
-<!-- The Modal -->
-<div id="myyModal" class="modal" >
-  <!-- Modal content -->
-  <div  id="mcontent">
-    <div  id="mheader">
-      <h2>Edit Details</h2>
-      <span class="cloose">&times;</span>
-    </div>
-    <div  id="mbody">
-            <span class="container101">
-              <img class="buy_ad" src="{{item.3}}">
-              <h3>{{item.0}}</h3>
-              <p>{{item.1}}</p>
-              <h6>Price : ₹ {{item.4}}</h6>
-              <h6><strong>Seller : {{item.2}}</strong></h6>
-                  <div id="divform">
-                  <form action="/action_page.php">
-                      <label for="tile">Title</label>
-                      <input type="text" id="tile" name="title" placeholder="Title" required/>
-
-                      <label for="desc">Description</label>
-                      <input type="text" id="desc" name="desc" placeholder="description"required/>
-
-
-                      <label for="price">Price</label>
-                  
-                      <input type="number" min="0.00" max="1000000000000.00" step="0.01" id="lname" name="lastname" placeholder="price" required/>
-
-                      <input type="submit" value="Save Changes">
-                  </form>
-                  </div>
-
-
-    </div>
-    <div  id="mfooter">
-      <h3> </h3>
-    </div>
-  </div>
-
-</div>
-
-
-
-
-
-  </span>
-
-{% comment %} <!-- The Modal -->
-<div id="myyModal" class="modal" >
-  <!-- Modal content -->
-  <div  id="mcontent">
-    <div  id="mheader">
-      <h2>Edit Details</h2>
-      <span class="cloose">&times;</span>
-    </div>
-    <div  id="mbody">
-            <span class="container101">
-              <img class="buy_ad" src="{{item.3}}">
-              <h3>{{item.0}}</h3>
-              <p>{{item.1}}</p>
-              <h6>Price : ₹ {{item.4}}</h6>
-              <h6><strong>Seller : {{item.2}}</strong></h6>
-                  <div id="divform">
-                  <form action="/action_page.php">
-                      <label for="fname">Title</label>
-                      <input type="text" id="fname" name="firstname" placeholder="Title">
-
-                      <label for="lname">Description</label>
-                      <input type="text" id="lname" name="lastname" placeholder="description">
-
-
-                      <label for="lname">Price</label>
-                      <input type="number" id="lname" name="lastname" placeholder="price">
-
-                      <input type="submit" value="Save Changes">
-                  </form>
-                  </div>
-
-
-    </div>
-    <div  id="mfooter">
-      <h3> </h3>
-    </div>
-  </div>
-
-</div>
-
- {% endcomment %}
-
-
-{% comment %}  
-
-<!-- The Modal -->
-<div id="myyModal" class="modal myyModal" >
-  <!-- Modal content -->
-  <div class="modal-content" id="mcontent">
-    <div class="modal-header" id="mheader">
-      <h2>{{item.0}}</h2>
-      <span class="cloose">&times;</span>
-    </div>
-    <div class="modal-body" id="mbody">
-            <span class="container101">
-              <img class="buy_ad" src="{{item.3}}">
-              <h3>{{item.0}}</h3>
-              <p>{{item.1}}</p>
-              <h6>Price : ₹ {{item.4}}</h6>
-              <h6><strong>Seller : {{item.2}}</strong></h6>
-    </div>
-    <div class="modal-footer" id="mfooter">
-      <h3> </h3>
-    </div>
-  </div>
-
-</div>
-{% endcomment %}
-
-  
-
-
-
-
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
-</div>
-
-
-
-<div class="container" id="create_ad">
-
-  <!-- The Modal -->
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Enter Product Details</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+    {% comment %}
+    <!-- The Modal -->
+    <div id="myyModal" class="modal">
+      <!-- Modal content -->
+      <div id="mcontent">
+        <div id="mheader">
+          <h2>Edit Details</h2>
+          <span class="cloose">&times;</span>
         </div>
-        
-        <!-- Modal body -->
-        
-        <div class="modal-body">
-        <!--add title name-->
-        <div class="input-group input-group-sm mb-3">
-         <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
-        </div>
-        <input type="text" id="title" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" autocomplete="off" required />
-        </div>
-        <!--ad description-->
-        <div class="input-group">
-        <div class="input-group-prepend">
-        <span class="input-group-text">Description</span>
-        </div>
-         <textarea class="form-control" id="description" aria-label="With textarea" autocomplete="off" required ></textarea>
-         </div>
-         <br>
-        <!--price-->
-        <div class="input-group">
-        <div class="input-group-prepend">
-        <span class="input-group-text">Price ₹</span>
-        </div>
-        <input type="text" id="price" class="form-control" aria-label="Amount (to the nearest rupee)" autocomplete="off" required />
-        </div>
-        <br>
-        <!--image upload-->
-          <div class="input-group mb-3">
-          <div class="input-group-prepend">
-           <span class="input-group-text">Image</span>
+        <div id="mbody">
+          <span class="container101">
+            <img class="buy_ad" src="{{item.3}}">
+            <h3>{{item.0}}</h3>
+            <p>{{item.1}}</p>
+            <h6>Price : ₹ {{item.4}}</h6>
+            <h6><strong>Seller : {{item.2}}</strong></h6>
+            <div id="divform">
+              <form action="/action_page.php">
+                <label for="fname">Title</label>
+                <input type="text" id="fname" name="firstname" placeholder="Title">
+
+                <label for="lname">Description</label>
+                <input type="text" id="lname" name="lastname" placeholder="description">
+
+
+                <label for="lname">Price</label>
+                <input type="number" id="lname" name="lastname" placeholder="price">
+
+                <input type="submit" value="Save Changes">
+              </form>
             </div>
-            <div class="custom-file">
-            <input type="file" accept="image/*,.pdf" class="custom-file-input" id="customFile" name="filename">
-            <label class="custom-file-label" id="fileLabel" for="customFile">Choose file</label>
+
+
+        </div>
+        <div id="mfooter">
+          <h3> </h3>
+        </div>
+      </div>
+
+    </div>
+
+    {% endcomment %}
+
+
+    {% comment %}
+
+    <!-- The Modal -->
+    <div id="myyModal" class="modal myyModal">
+      <!-- Modal content -->
+      <div class="modal-content" id="mcontent">
+        <div class="modal-header" id="mheader">
+          <h2>{{item.0}}</h2>
+          <span class="cloose">&times;</span>
+        </div>
+        <div class="modal-body" id="mbody">
+          <span class="container101">
+            <img class="buy_ad" src="{{item.3}}">
+            <h3>{{item.0}}</h3>
+            <p>{{item.1}}</p>
+            <h6>Price : ₹ {{item.4}}</h6>
+            <h6><strong>Seller : {{item.2}}</strong></h6>
+        </div>
+        <div class="modal-footer" id="mfooter">
+          <h3> </h3>
+        </div>
+      </div>
+
+    </div>
+    {% endcomment %}
+
+
+
+
+
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </div>
+
+
+
+  <div class="container" id="create_ad">
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Enter Product Details</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+
+          <div class="modal-body">
+            <!--add title name-->
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+              </div>
+              <input type="text" id="title" class="form-control" aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm" autocomplete="off" required />
             </div>
-           </div>
+            <!--ad description-->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Description</span>
+              </div>
+              <textarea class="form-control" id="description" aria-label="With textarea" autocomplete="off"
+                required></textarea>
+            </div>
+            <br>
+            <!--price-->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Price ₹</span>
+              </div>
+              <input type="text" id="price" class="form-control" aria-label="Amount (to the nearest rupee)"
+                autocomplete="off" required />
+            </div>
+            <br>
+            <!--image upload-->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Image</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" accept="image/*,.pdf" class="custom-file-input" id="customFile" name="filename">
+                <label class="custom-file-label" id="fileLabel" for="customFile">Choose file</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" onclick="upload('{{uid}}','{{full_name}}')" id="uploadclear" class="btn btn-danger"
+              data-dismiss="modal">Upload</button>
+          </div>
+
         </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" onclick="upload('{{uid}}','{{full_name}}')" id="uploadclear" class="btn btn-danger" data-dismiss="modal">Upload</button>
-        </div>
-        
       </div>
     </div>
   </div>
-</div>
 
 
-<script>
-// Add the following code if you want the name of the file appear on select
-$(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
-</script>
+  <script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+  </script>
 
-<script>
-    function changePaddingLeft(screenSize){
-      if(screenSize.matches){
+  <script>
+    function changePaddingLeft(screenSize) {
+      if (screenSize.matches) {
         document.getElementById("screenSizeChange").style.marginLeft = "550px";
       }
     }
@@ -305,38 +309,39 @@ $(".custom-file-input").on("change", function() {
 
 
 
-<script>
-function clickHandler(event) {
-var x = event.currentTarget.parentElement;
-y=x.parentElement;
-z=y.parentElement;
-a=z.parentElement;
-my_modal=a.childNodes;
-// Get the modal
-var modal = my_modal[5];
-// Get the button that opens the modal
-var btn = event.currentTarget;
-// Get the <span> element that closes the modal
-var span=modal.childNodes[3].childNodes[1].childNodes[3];
-console.log(span);
-var y=span;
-var x=y.parentElement;
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-   }
-</script>
+  <script>
+    function clickHandler(event) {
+      var x = event.currentTarget.parentElement;
+      y = x.parentElement;
+      z = y.parentElement;
+      a = z.parentElement;
+      my_modal = a.childNodes;
+      // Get the modal
+      var modal = my_modal[5];
+      // Get the button that opens the modal
+      var btn = event.currentTarget;
+      // Get the <span> element that closes the modal
+      var span = modal.childNodes[3].childNodes[1].childNodes[3];
+      console.log(span);
+      var y = span;
+      var x = y.parentElement;
+      // When the user clicks the button, open the modal 
+      btn.onclick = function () {
+        modal.style.display = "block";
+      }
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      }
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    }
+  </script>
 
 </body>
+
 </html>

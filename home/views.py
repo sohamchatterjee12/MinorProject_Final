@@ -180,8 +180,18 @@ def rent_page(request):
 
 def lease_page(request):
     if request.session.is_empty() == False :
+        items_response=db.child("lease").child(request.session["uid"]).get()
+        items=items_response.val()
+        if items:
+            items_list=list(items.values())
+        else:
+            items_list=None
+        full_name=request.session["fName"]+" "+request.session["lName"]
         context={}
+        context["items"]=items_list
         context["user_name"]=request.session["fName"]
+        context["uid"]=request.session["uid"]
+        context["full_name"]=full_name
         return render(request,'lease_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
