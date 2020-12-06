@@ -175,11 +175,12 @@ box-shadow: 3px 43px 87px 21px rgba(0,0,0,0.75);
 position: relative;
 background-color: #0000008c;
 margin: 20%;
-margin-top: 10%;
+margin-top: 1%;
 margin-left:14%;
 padding: 1%;
 border: 1px solid #888;
 width: 70%;
+
 
 box-shadow: 0 4px 8px 0 rgb(52 50 50 / 0%),0 6px 20px 0 rgba(0,0,0,0.19);
 -webkit-animation-name: animatetop;
@@ -217,15 +218,17 @@ cursor: pointer;
 }
 
 #mheader {
-padding: 2px 16px;
+padding: 20px 16px;
 background-color: #353333;
 color: white;
 text-align: center;
 }
 
-#mbody {padding: 20px 16px 200px;
+#mbody {padding: 10px 0px 0px 10px;
   background-color: #353333;
-color:white;}
+color:white;
+
+}
 
 #mfooter {
 padding: 2px 16px;
@@ -234,3 +237,36 @@ color: white;
 }
 
 /* ended ad modal here */
+
+/* form edit details */
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #383838;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #242424;
+}
+
+#divform {
+  border-radius: 5px;
+  background-color: #504f4f00;
+  padding: 35px;
+}
