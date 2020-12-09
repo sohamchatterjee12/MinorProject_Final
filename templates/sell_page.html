@@ -30,6 +30,7 @@
     //console.log(firebase.storage)
   </script>
   <script type="text/javascript" src="static/sell_page.js"></script>
+  <script type="text/javascript" src="static/sell_page1.js"></script>
   <div class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
     <a class="navbar-brand" href="home" id="image_container">
       <img src="static/common/logo_final_2.png" width="120" height="60" loading="lazy" alt="404">
@@ -67,9 +68,9 @@
       </div>
     </div>
   </div>
+  <div id="showAlert">
 
-
-
+  </div>
   <!--seller ads-->
   <div class="ads_shown" id="ads">
     <span>
@@ -113,24 +114,17 @@
               <h6>Price : ₹ {{item.4}}</h6>
               <h6><strong>Seller : {{item.2}}</strong></h6>
               <div id="divform">
-                <form action="/action_page.php">
-                  <label for="tile">Title</label>
-                  <input type="text" id="tile" name="title" placeholder="Title" required />
-
-                  <label for="desc">Description</label>
-                  <input type="text" id="desc" name="desc" placeholder="Description" required />
-
-
-                  <label for="price">Price</label>
-
-                  <input type="number" min="0.00" max="1000000000000.00" step="0.01" id="lname" name="lastname"
-                    placeholder="Price" required />
-
-                  <input type="submit" value="Save Changes">
-                </form>
+                  <label for="title2">Title : </label>
+                {{item.0}}
+                <br>
+                <label for="desc2">Description</label>
+                <br>
+                <textarea type="text" id="desc2" name="desc2" placeholder="Description" rows="4" cols="55" required autocomplete="off" style="border-radius:10px">{{item.1}}</textarea>
+                <br>
+                <label for="price2">Price</label>
+                <input type="text" id="price2" name="price2" placeholder="Price" required autocomplete="off"  style="width:20%;" value="{{item.4}}"/>
+                  <input type="submit" value="Save Changes" onclick="updateSellAD('{{uid}}', '{{item.6}}', '{{item.0}}')" id="closemodal">
               </div>
-
-
           </div>
           <div id="mfooter">
             <h3> </h3>
@@ -139,80 +133,6 @@
 
       </div>
     </span>
-
-    {% comment %}
-    <!-- The Modal -->
-    <div id="myyModal" class="modal">
-      <!-- Modal content -->
-      <div id="mcontent">
-        <div id="mheader">
-          <h2>Edit Details</h2>
-          <span class="cloose">&times;</span>
-        </div>
-        <div id="mbody">
-          <span class="container101">
-            <img class="buy_ad" src="{{item.3}}">
-            <h3>{{item.0}}</h3>
-            <p>{{item.1}}</p>
-            <h6>Price : ₹ {{item.4}}</h6>
-            <h6><strong>Seller : {{item.2}}</strong></h6>
-            <div id="divform">
-              <form action="/action_page.php">
-                <label for="fname">Title</label>
-                <input type="text" id="fname" name="firstname" placeholder="Title">
-
-                <label for="lname">Description</label>
-                <input type="text" id="lname" name="lastname" placeholder="description">
-
-
-                <label for="lname">Price</label>
-                <input type="number" id="lname" name="lastname" placeholder="price">
-
-                <input type="submit" value="Save Changes">
-              </form>
-            </div>
-
-
-        </div>
-        <div id="mfooter">
-          <h3> </h3>
-        </div>
-      </div>
-
-    </div>
-
-    {% endcomment %}
-
-
-    {% comment %}
-
-    <!-- The Modal -->
-    <div id="myyModal" class="modal myyModal">
-      <!-- Modal content -->
-      <div class="modal-content" id="mcontent">
-        <div class="modal-header" id="mheader">
-          <h2>{{item.0}}</h2>
-          <span class="cloose">&times;</span>
-        </div>
-        <div class="modal-body" id="mbody">
-          <span class="container101">
-            <img class="buy_ad" src="{{item.3}}">
-            <h3>{{item.0}}</h3>
-            <p>{{item.1}}</p>
-            <h6>Price : ₹ {{item.4}}</h6>
-            <h6><strong>Seller : {{item.2}}</strong></h6>
-        </div>
-        <div class="modal-footer" id="mfooter">
-          <h3> </h3>
-        </div>
-      </div>
-
-    </div>
-    {% endcomment %}
-
-
-
-
 
 
     {% endfor %}
@@ -340,6 +260,12 @@
         }
       }
     }
+  </script>
+  <script>
+  $('#closemodal').click(function() {
+    console.log("atharva");
+    $('#myyModal').modal('hide');
+  });
   </script>
 
 </body>

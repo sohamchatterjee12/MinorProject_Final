@@ -1,4 +1,4 @@
-function changeStatus(evt, status, uid, parentKey,showerId,productId) {
+function changeStatus(evt, status, uid, parentKey,showerId,productId,sell_lease_key,title_key) {
     console.log(evt.currentTarget);
     var x = evt.currentTarget.parentElement;
     console.log(x);
@@ -7,7 +7,6 @@ function changeStatus(evt, status, uid, parentKey,showerId,productId) {
     var newspanItem = document.createElement("span");
     newspanItem.className="response101";
 
-    parentKey='"'+parentKey+'"'
     console.log(parentKey)
     var received_interestToChange=firebase.database().ref("/interests_received").child(uid).child(parentKey);
     var shown_interestToChange=firebase.database().ref("/interests_shown").child(showerId).child(parentKey);
@@ -36,27 +35,18 @@ function changeStatus(evt, status, uid, parentKey,showerId,productId) {
             2:showerId
         });
 
-        var confirmation_count_response=firebase.database().ref("/count").child("confirmations")
-        
-        confirmation_count_response.once('value', (snapshot) =>{
-
-
-            const data = snapshot.val();
-            var confirmation_id='"'+String(data+1)+'"';
-            console.log(confirmation_id)
-
-        firebase.database().ref("/confirmations_shipped").child(uid).child(confirmation_id).set({
+        var sell_lease=0;
+        if (sell_lease_key==='Lessor :') {
+            sell_lease=1;
+        }
+        firebase.database().ref("/confirmations_shipped").child(uid).push({
             0:0,
             1:productId,
-            2:showerId
+            2:showerId,
+            3:sell_lease,
+            4:title_key
         });
 
-
-        firebase.database().ref("/count").update({
-            confirmations:data+1
-        })
-
-        });
 
 
     }

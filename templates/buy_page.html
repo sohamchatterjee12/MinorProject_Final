@@ -23,8 +23,9 @@
     //console.log(firebase.storage)
   </script>
   <script type="text/javascript" src="static/buy_page1.js"></script>
+  <script type="text/javascript" src="static/buy_page2.js"></script>
 <div class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
-    <a class="navbar-brand" href="#" id="image_container">
+    <a class="navbar-brand" href="home" id="image_container">
       <img src="static/common/logo_final_2.png" width="120" height="60" loading="lazy" alt="404">
     </a>
     <div class="dropdown">
@@ -60,18 +61,23 @@
       </div>
     </div>
   </div>
+  <div id="showAlert">
 
+  </div>
 <!--search box -->
 <br>
 <div class="boxcontainer">
    <table class="elementcontainer">
       <tr>
-      <td>
-      <input type="text" id="search_bar" placeholder="Search Item" class="Search">
-      </td>
-      <td>
-    <img src="static/common/sbttn.png" id="search_bttn" onclick="search_clicked()" width="40" height="30">
-      </td>
+        <td>
+          <form action='buy' method="get" id="form">
+            {% csrf_token %}
+            <input type="text" name="text" id="search_bar" placeholder="Search Item" class="Search" autocomplete="off" required />
+          </form>
+        </td>
+        <td>
+          <img src="static/common/sbttn.png" onClick="search_clicked()" id="search_bttn" width="40" height="30">  
+        </td>
       </tr>
     </table>
 </div>      
@@ -80,20 +86,51 @@
 
 <div class="ads_shown" id="ads">
 
+  {% with items_list=list_to_show %}
+  {% if items_list|length > 0 %}
+  {% for item in items_list reversed %}
   <span class="row">
         <div class="column">
           <div class="card">
             <span class="container101">
-              <img class="buy_ad" src="static/common/logo_final_2.png">
-              <h3>Title</h3>
-              <p>Description</p>
-              <h6>Price : ₹ </h6>
-              <h6><strong>Seller : </strong></h6>
-              <a href="ad_page"><button type="button" onclick="#">See AD</button></a>
+              <img class="buy_ad" src="{{item.3}}">
+              <h3>{{item.0}}</h3>
+              <p>{{item.1}}</p>
+              <h6>Price : ₹ {{item.4}}</h6>
+              <h6><strong>Seller : {{item.2}}</strong></h6>
+              <button type="button" id="myyBtn" onclick="clickHandler(event)">Show Interest</button>
           </div>
         </div>
-  </span>
 
+
+     <!-- The Modal -->
+      <div id="myyModal" class="modal">
+        <!-- Modal content -->
+        <div id="mcontent">
+          <div id="mheader">
+            <h2>Details</h2>
+            <span class="cloose">&times;</span>
+          </div>
+          <div id="mbody">
+            <span class="container101">
+              <img class="buy_ad" src="{{item.3}}">
+              <h3>{{item.0}}</h3>
+              <p>{{item.1}}</p>
+              <h6>Price : ₹ {{item.4}}</h6>
+              <h6><strong>Seller : {{item.2}}</strong></h6>
+              </div>
+            <input type="submit" value="Show Interest" onclick="show_interest(event,{{uid}},{{item.6}},'{{item.7}}','{{item.8}}')" value="Show Interest">
+          </div>
+          <div id="mfooter">
+            <h3> </h3>
+          </div>
+        </div>
+
+      </div>
+  </span>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
 </div>
 
 
@@ -107,5 +144,37 @@
     var screenSize = window.matchMedia("(min-width: 1300px)")
     changePaddingLeft(screenSize) // Call listener function at run time
     screenSize.addListener(changePaddingLeft) // Attach listener function on state changes
+  </script>
+ <script>
+    function clickHandler(event) {
+      var x = event.currentTarget.parentElement;
+      y = x.parentElement;
+      z = y.parentElement;
+      a = z.parentElement;
+      my_modal = a.childNodes;
+      // Get the modal
+      var modal = my_modal[5];
+      // Get the button that opens the modal
+      var btn = event.currentTarget;
+      // Get the <span> element that closes the modal
+      var span = modal.childNodes[3].childNodes[1].childNodes[3];
+      console.log(span);
+      var y = span;
+      var x = y.parentElement;
+      // When the user clicks the button, open the modal 
+      btn.onclick = function () {
+        modal.style.display = "block";
+      }
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      }
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    }
   </script>
 </body>

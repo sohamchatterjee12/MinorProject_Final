@@ -67,25 +67,38 @@ def interests_page(request):
         interest_shown=interest_shown_response.val()
         interest_received=interest_received_response.val()
 
-        print(interest_shown)
-        print(interest_received)
+        #print(interest_shown)
+        #print(interest_received)
 
         if interest_shown:
             for i in interest_shown.keys():
-                shownName=db.child("userId").child(interest_shown[i][2]).get()
-                fullName=shownName.val()["fName"]+" "+shownName.val()["lName"]
-                interest_shown[i].append(fullName)
+                if interest_shown[i][3]==0:
+                    product_details=db.child("sell").child(interest_shown[i][2]).child(interest_shown[i][1]).get()
+                    interest_shown[i][3]="Seller :"
+                else:
+                    product_details=db.child("lease").child(interest_shown[i][2]).child(interest_shown[i][1]).get()
+                    interest_shown[i][3]="Lessor :"
                 interest_shown[i].append(i)
+                print(product_details.val())
+                interest_shown[i]=interest_shown[i]+product_details.val()
             interest_shown=list(interest_shown.values())
         else:
             interest_shown=None
         
         if interest_received:
             for i in interest_received.keys():
-                receivedName=db.child("userId").child(interest_received[i][2]).get()
-                fullName=receivedName.val()["fName"]+" "+receivedName.val()["lName"]
-                interest_received[i].append(fullName)
+                if interest_received[i][3]==0:
+                    product_details=db.child("sell").child(request.session["uid"]).child(interest_received[i][1]).get()
+                    interest_received[i][3]="Seller :"
+                else:
+                    product_details=db.child("lease").child(request.session["uid"]).child(interest_received[i][1]).get()
+                    interest_received[i][3]="Lessor :"
+                product_details=product_details.val()
                 interest_received[i].append(i)
+                shower_name=db.child("userId").child(interest_received[i][2]).get()
+                shower_full_name=shower_name.val()["fName"]+" "+shower_name.val()["lName"]
+                product_details.append(shower_full_name)
+                interest_received[i]=interest_received[i]+product_details
             interest_received=list(interest_received.values())
         else:
             interest_received=None
@@ -104,8 +117,6 @@ def confirmations_page(request):
     if request.session.is_empty() == False:
         confirmations_shipped_response = db.child("confirmations_shipped").child(request.session["uid"]).get() 
         confirmations_received_response = db.child("confirmations_received").child(request.session["uid"]).get() 
-        #interest_shown_keys_response=db.child("interests_shown").child(request.session["uid"]).shallow().get()
-        #interest_received_keys_response=db.child("interests_received").child(request.session["uid"]).shallow().get() 
         
         confirmations_shipped=confirmations_shipped_response.val()
         confirmations_received=confirmations_received_response.val()
@@ -115,10 +126,21 @@ def confirmations_page(request):
 
         if confirmations_shipped:
             for i in confirmations_shipped.keys():
-                shippedToName=db.child("userId").child(confirmations_shipped[i][2]).get()
-                fullName=shippedToName.val()["fName"]+" "+shippedToName.val()["lName"]
-                confirmations_shipped[i].append(fullName)
+                if confirmations_shipped[i][3]==0:
+                    product_details=db.child("sell").child(request.session["uid"]).child(confirmations_shipped[i][1]).get()
+                    confirmations_shipped[i][3]="Seller :"
+                else:
+                    product_details=db.child("lease").child(request.session["uid"]).child(confirmations_shipped[i][1]).get()
+                    confirmations_shipped[i][3]="Lessor :"
+                product_details=product_details.val()
+                print("asdsa2",confirmations_shipped[i][2])
+                print("asdsa1", confirmations_shipped[i][1])
+                print(product_details)
                 confirmations_shipped[i].append(i)
+                buyer_name=db.child("userId").child(confirmations_shipped[i][2]).get()
+                buyer_full_name=buyer_name.val()["fName"]+" "+buyer_name.val()["lName"]
+                product_details.append(buyer_full_name)
+                confirmations_shipped[i]=confirmations_shipped[i]+product_details
             confirmations_shipped=list(confirmations_shipped.values())
         else:
             confirmations_shipped=None
@@ -126,10 +148,14 @@ def confirmations_page(request):
 
         if confirmations_received:
             for i in confirmations_received.keys():
-                shippedFromName=db.child("userId").child(confirmations_received[i][2]).get()
-                fullName=shippedFromName.val()["fName"]+" "+shippedFromName.val()["lName"]
-                confirmations_received[i].append(fullName)
+                if confirmations_received[i][3]==0:
+                    product_details=db.child("sell").child(confirmations_received[i][2]).child(confirmations_received[i][1]).get()
+                    confirmations_received[i][3]="Seller :"
+                else:
+                    product_details=db.child("lease").child(confirmations_received[i][2]).child(confirmations_received[i][1]).get()
+                    confirmations_received[i][3]="Lessor :"
                 confirmations_received[i].append(i)
+                confirmations_received[i]=confirmations_received[i]+product_details.val()
             confirmations_received=list(confirmations_received.values())
         else:
             confirmations_received=None
@@ -146,23 +172,65 @@ def confirmations_page(request):
 
 def buy_page(request):
     if request.session.is_empty() == False:
-        context={}
-        context["user_name"]=request.session["fName"]
-        return render(request,'buy_page.html',context)
+        if request.method == 'GET' and request.GET.get('text')!=None:
+            search_text=request.GET.get('text').lower()
+            print (search_text)
+            list_of_items=db.child("titles").order_by_key().equal_to(search_text).get().val()
+            if list_of_items:
+                list_of_items=list_of_items[search_text]
+                item_list=list(list_of_items.values())
+                keys_list=list(list_of_items.keys())
+                print(item_list)
+                print(keys_list)
+            else:
+                item_list=None
+            
+            list_to_show=[]
+            j=0
+            if item_list:
+                for i in item_list:
+                    intermediate_list=db.child("sell").child(i[0]).child(i[1]).get().val()
+                    intermediate_list.append(i[0])
+                    intermediate_list.append(i[1])
+                    intermediate_list.append(keys_list[j])
+                    j+=1
+                    list_to_show.append(intermediate_list)
+            else:
+                list_to_show=None;
+            print(list_to_show)
+            context={}
+            context["list_to_show"]=list_to_show
+            context["searched_item"]=request.GET.get('text')
+            context["user_name"]=request.session["fName"]
+            context["uid"]=request.session["uid"]
+            return render(request,'buy_page.html',context)
+        else:
+            context={}
+            context["user_name"]=request.session["fName"]
+            return render(request,'buy_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 
 def sell_page(request):
     if request.session.is_empty() == False :
         items_response=db.child("sell").child(request.session["uid"]).get()
+        items_response_keys = db.child("sell").child(request.session["uid"]).shallow().get()
+        items_keys = items_response_keys.val()
         items=items_response.val()
         if items:
-            items_list=list(items.values())
+            final_list = []
+            # items_list=list(items.values())
+            for i in items.keys():
+                if items[i][5] == 0:
+                    items[i].append(i)
+                    final_list.append(items[i])
+            # print(type(final_list))
         else:
-            items_list=None
+            final_list=None
+            
         full_name=request.session["fName"]+" "+request.session["lName"]
         context={}
-        context["items"]=items_list
+        context["items"]=final_list
         context["user_name"]=request.session["fName"]
         context["uid"]=request.session["uid"]
         context["full_name"]=full_name
@@ -172,23 +240,63 @@ def sell_page(request):
 
 def rent_page(request):
     if request.session.is_empty() == False :
-        context={}
-        context["user_name"]=request.session["fName"]
-        return render(request,'rent_page.html',context)
+        if request.method == 'GET' and request.GET.get('text')!=None:
+            search_text=request.GET.get('text').lower()
+            print (search_text)
+            list_of_items=db.child("lease_titles").order_by_key().equal_to(search_text).get().val()
+            if list_of_items:
+                list_of_items=list_of_items[search_text]
+                item_list=list(list_of_items.values())
+                keys_list=list(list_of_items.keys())
+                # print(item_list)
+                # print(keys_list)
+            else:
+                item_list=None
+            
+            list_to_show=[]
+            j=0
+            if item_list:
+                for i in item_list:
+                    intermediate_list=db.child("lease").child(i[0]).child(i[1]).get().val()
+                    intermediate_list.append(i[0])
+                    intermediate_list.append(i[1])
+                    intermediate_list.append(keys_list[j])
+                    j+=1
+                    list_to_show.append(intermediate_list)
+            else:
+                list_to_show=None;
+            print(list_to_show)
+            context={}
+            context["list_to_show"]=list_to_show
+            context["searched_item"]=request.GET.get('text')
+            context["user_name"]=request.session["fName"]
+            context["uid"]=request.session["uid"]
+            return render(request,'rent_page.html',context)
+        else:
+            context={}
+            context["user_name"]=request.session["fName"]
+            return render(request,'rent_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
 
 def lease_page(request):
     if request.session.is_empty() == False :
         items_response=db.child("lease").child(request.session["uid"]).get()
-        items=items_response.val()
+        items_response_keys = db.child("lease").child(request.session["uid"]).shallow().get()
+        items = items_response.val()
+        items_keys = items_response_keys.val() 
         if items:
-            items_list=list(items.values())
+            final_list = []
+            # items_list=list(items.values())
+            for i in items.keys():
+                if items[i][5] == 0:
+                    items[i].append(i)
+                    final_list.append(items[i])
         else:
-            items_list=None
+            final_list=None
         full_name=request.session["fName"]+" "+request.session["lName"]
         context={}
-        context["items"]=items_list
+        context["items"]=final_list
         context["user_name"]=request.session["fName"]
         context["uid"]=request.session["uid"]
         context["full_name"]=full_name
@@ -223,16 +331,37 @@ def all_transactions_page(request):
     if request.session.is_empty() == False :
         transaction_details_response = db.child("all_transactions").child(request.session["uid"]).get()
         transaction_details = transaction_details_response.val()
-        # print(transaction_details)
+        print(transaction_details)
         context = {}
+        iem_details = []
         if transaction_details:
             for i in transaction_details.keys():
+                if(transaction_details[i][3] == 1 or transaction_details[i][3] == 2):
+                    if(transaction_details[i][3] == 2):
+                        item_details = db.child("sell").child(request.session["uid"]).child(transaction_details[i][1]).get().val()
+                    elif(transaction_details[i][3] == 1):
+                        item_details = db.child("sell").child(transaction_details[i][2]).child(transaction_details[i][1]).get().val()
+                    # print(item_details)
+                    transaction_details[i].append(item_details[0])
+                    transaction_details[i].append(item_details[1])
+                    transaction_details[i].append(item_details[3])
+                    transaction_details[i].append(item_details[4])
+                elif(transaction_details[i][3] == 3 or transaction_details[i][3] == 4):
+                    if(transaction_details[i][3] == 3):
+                        item_details = db.child("lease").child(transaction_details[i][2]).child(transaction_details[i][1]).get().val()
+                    elif(transaction_details[i][3] == 4):
+                        item_details = db.child("lease").child(request.session["uid"]).child(transaction_details[i][1]).get().val()
+                    transaction_details[i].append(item_details[0])
+                    transaction_details[i].append(item_details[1])
+                    transaction_details[i].append(item_details[3])
+                    transaction_details[i].append(item_details[4])
                 to_from_name=db.child("userId").child(transaction_details[i][2]).get()
                 fullName=to_from_name.val()["fName"]+" "+to_from_name.val()["lName"]
                 transaction_details[i][2] = fullName
             transaction_details_list = list(transaction_details.values())
         else:
             transaction_details_list = None
+
         print(transaction_details_list)
         context["transaction_details_list"] = transaction_details_list
         context["user_name"]=request.session["fName"]

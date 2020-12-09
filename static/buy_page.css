@@ -148,5 +148,112 @@ body {
     border:grey solid 2px;
   }
 
+  #form{
+    margin-bottom:0px;
+  }
+
+  /* ad modal implemented here */
+
+
+
+/* The Modal (background) */
+#myymodal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  box-shadow: 3px 43px 87px 21px rgba(0,0,0,0.75);
+  }
+  
+  /* Modal Content */
+  #mcontent {
+  position: relative;
+  background-color: #0000008c;
+  margin: 20%;
+  margin-top: 1%;
+  margin-left:14%;
+  padding: 1%;
+  border: 1px solid #888;
+  width: 70%;
+  
+  
+  box-shadow: 0 4px 8px 0 rgb(52 50 50 / 0%),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+  
+  
+  }
+  
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+  }
+  
+  /* The Close Button */
+  .cloose {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  }
+  
+  .cloose:hover,
+  .cloose:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  }
+  
+  #mheader {
+  padding: 20px 16px;
+  background-color: #353333;
+  color: white;
+  text-align: center;
+  }
+  
+  #mbody {padding: 10px 0px 0px 10px;
+    background-color: #353333;
+  color:white;
+  
+  }
+  
+  #mfooter {
+  padding: 2px 16px;
+  background-color: #353333;
+  color: white;
+  }
+  
+  input[type=submit] {
+    width: 100%;
+    background-color: #383838;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+    background-color: #242424;
+  }
+  /* ended ad modal here */
+
+
 
   

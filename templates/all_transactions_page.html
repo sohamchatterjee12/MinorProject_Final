@@ -57,63 +57,67 @@
   {% for transaction in transaction_details_list reversed %}
   {% if transaction.3 is 1 %}  <!-- 1 is buy-->
   <span class="row">
-    <div class="column">
-      <div class="card">
-        <span class="container101">
-          <img class="a_transaction" src="static/common/logo_final_2.png">
-          <span>You have bought item {{transaction.1}}</span>
-          <p>details about the ad/product</p>
-          <p>details about the ad/product</p>
-          <p>Seller : {{transaction.2}}</p>
-          <p style="padding-left:28%"> Date of purchase : {{transaction.0}}</p>
-      </div>
-    </div>
-  </span>
+        <div class="column">
+          <div class="card">
+            <span class="container101">
+              <img class="a_transaction" src="{{transaction.6}}">
+              <span>You have bought this product from {{transaction.2}}.</span>
+              <h3>{{transaction.4}}</h3>
+              <p>{{transaction.5}}</p>
+              <h6>Price : ₹ {{transaction.7}}</h6>
+              <h6>Date of Transaction : {{transaction.0}}</h6>
+          </div>
+        </div>
+      </span>
+  
   {% endif %}
   {% if transaction.3 is 2 %} <!-- 2 is sell-->
   <span class="row">
-    <div class="column">
-      <div class="card">
-        <span class="container101">
-          <img class="a_transaction" src="static/common/logo_final_2.png">
-          <span>You have sold the item {{transaction.1}}</span>
-          <p>details about the ad/product</p>
-          <p>details about the ad/product</p>
-          <p>Buyer : {{transaction.2}}</p>
-          <p style="padding-left:28%"> Date of selling : {{transaction.0}}</p>
-      </div>
-    </div>
-  </span>
+        <div class="column">
+          <div class="card">
+            <span class="container101">
+              <img class="a_transaction" src="{{transaction.6}}">
+              <span>You have sold this product to {{transaction.2}}.</span>
+              <h3>{{transaction.4}}</h3>
+              <p>{{transaction.5}}</p>
+              <h6>Price : ₹ {{transaction.7}}</h6>
+              <h6>Date of Transaction : {{transaction.0}}</h6>
+          </div>
+        </div>
+      </span>
+  
   {% endif %}
   {% if transaction.3 is 3 %} <!-- 3 is rent-->
   <span class="row">
-    <div class="column">
-      <div class="card">
-        <span class="container101">
-          <img class="a_transaction" src="static/common/logo_final_2.png">
-          <span>You have rented the item {{transaction.1}}</span>
-          <p>details about the ad/product</p>
-          <p>details about the ad/product</p>
-          <p> Rented from : {{transaction.2}}</p>
-          <p style="padding-left:28%"> Date of renting : {{transaction.0}}</p>
-      </div>
-    </div>
-  </span>
+        <div class="column">
+          <div class="card">
+            <span class="container101">
+              <img class="a_transaction" src="{{transaction.6}}">
+              <span>You have rented this product from {{transaction.2}}.</span>
+              <h3>{{transaction.4}}</h3>
+              <p>{{transaction.5}}</p>
+              <h6>Price : ₹ {{transaction.7}}</h6>
+              <h6>Date of Transaction : {{transaction.0}}</h6>
+          </div>
+        </div>
+      </span>
+  
   {% endif %}
   {% if transaction.3 is 4 %} <!-- 4 is lease-->
   <span class="row">
-    <div class="column">
-      <div class="card">
-        <span class="container101">
-          <img class="a_transaction" src="static/common/logo_final_2.png">
-          <span>You have leased the {{transaction.1}}</span>
-          <p>details about the ad/product</p>
-          <p>details about the ad/product</p>
-          <p> Leased to : {{transaction.2}}</p>
-          <p style="padding-left:28%"> Date of lease : {{transaction.0}}</p>
-      </div>
-    </div>
-  </span>
+        <div class="column">
+          <div class="card">
+            <span class="container101">
+              <img class="a_transaction" src="{{transaction.6}}">
+              <span>You have leased this product to {{transaction.2}}.</span>
+              <h3>{{transaction.4}}</h3>
+              <p>{{transaction.5}}</p>
+              <h6>Price : ₹ {{transaction.7}}</h6>
+              <h6>Date of Transaction : {{transaction.0}}</h6>
+          </div>
+        </div>
+      </span>
+  
   {% endif %}
   {% endfor %}
   {% endif %}

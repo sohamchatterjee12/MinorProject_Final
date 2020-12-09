@@ -30,6 +30,7 @@
     //console.log(firebase.storage)
   </script>
   <script type="text/javascript" src="static/lease_page.js"></script>
+  <script type="text/javascript" src="static/lease_page1.js"></script>
   <div class="navbar navbar-expand-lg navbar-dark bg-dark" id="soham">
     <a class="navbar-brand" href="home" id="image_container">
       <img src="static/common/logo_final_2.png" width="120" height="60" loading="lazy" alt="404">
@@ -93,42 +94,40 @@
             <button type="button" id="myyBtn" onclick="clickHandler(event)">Edit Details</button>
         </div>
       </div>
-    
 
-    <!-- The Modal -->
-    <div id="myyModal" class="modal">
-      <!-- Modal content -->
-      <div id="mcontent">
-        <div id="mheader">
-          <h2>Edit Details</h2>
-          <span class="cloose">&times;</span>
-        </div>
+
+      <!-- The Modal -->
+      <div id="myyModal" class="modal">
+        <!-- Modal content -->
+        <div id="mcontent">
+          <div id="mheader">
+            <h2>Edit Details</h2>
+            <span class="cloose">&times;</span>
+          </div>
           <div id="mbody">
             <span class="container101">
-            <img class="buy_ad" src="{{item.3}}">
-            <h3>{{item.0}}</h3>
-            <p>{{item.1}}</p>
-            <h6>Price : ₹ {{item.4}}</h6>
-            <h6><strong>Seller : {{item.2}}</strong></h6>
-            <div id="divform">
-              <form action="/action_page.php">
-                <label for="tile">Title</label>
-                <input type="text" id="tile" name="title" placeholder="Title" required autocomplete="off"/>
+              <img class="buy_ad" src="{{item.3}}">
+              <h3>{{item.0}}</h3>
+              <p>{{item.1}}</p>
+              <h6>Price : ₹ {{item.4}}</h6>
+              <h6><strong>Seller : {{item.2}}</strong></h6>
+              <div id="divform">
+                <label for="title2">Title : </label>
+                {{item.0}}
+                <br>
+                <label for="desc2">Description</label>
+                <br>
+                <textarea type="text" id="desc2" name="desc2" placeholder="Description" rows="4" cols="55" required
+                  autocomplete="off" style="border-radius:10px">{{item.1}}</textarea>
+                <br>
+                <label for="price2">Price</label>
 
-                <label for="desc">Description</label>
-                <input type="text" id="desc" name="desc" placeholder="Description" required autocomplete="off"/>
+                <input type="text" id="price2" name="price2" placeholder="Price" required autocomplete="off"
+                  style="width:20%;" value="{{item.4}}" />
+                <input type="submit" value="Save Changes" onclick="updateLeaseAD('{{uid}}', '{{item.5}}', '{{item.0}}')">
 
-                <label for="price">Price</label>
-
-                <input type="text" id="lname" name="lastname" placeholder="Price" required autocomplete="off"  style="width:20%;"/>
-                <span>
-                  <label for="duration" style="margin-left:3%">Duration</label>
-                  <input type="text" id="duration" name="lname" placeholder="Duration" required style="width:20%;"/>
-                </span>
-              </form>
-                <button style="margin-top:4%" id="saveButton">Save Changes</button>
               </div>
-            </div>
+          </div>
           <div id="mfooter">
             <h3> </h3>
           </div>
@@ -186,8 +185,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">Duration</span>
               </div>
-              <input type="text" id="duration" class="form-control" aria-label="A duration"
-                autocomplete="off" required />
+              <input type="text" id="duration" class="form-control" aria-label="A duration" autocomplete="off"
+                required />
             </div>
             <br>
             <!--image upload-->
