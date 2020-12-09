@@ -203,10 +203,12 @@ def buy_page(request):
             context["searched_item"]=request.GET.get('text')
             context["user_name"]=request.session["fName"]
             context["uid"]=request.session["uid"]
+            context["show_happy"]=0
             return render(request,'buy_page.html',context)
         else:
             context={}
             context["user_name"]=request.session["fName"]
+            context["show_happy"]=1
             return render(request,'buy_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
