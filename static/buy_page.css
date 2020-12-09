@@ -255,5 +255,24 @@ body {
   /* ended ad modal here */
 
 
+/* do search start */
+
+#do_search
+{
+  margin-left:30%;
+}
+#do_search_text
+{ position:relative;
+  color:white;
+  font-size: xx-large;
+  left:10%;
+  bottom:80px;
+} 
+#do_search_img
+{
+  width: 10%;
+}
+/* do search end */
+
 
   

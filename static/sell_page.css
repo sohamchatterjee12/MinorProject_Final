@@ -270,3 +270,39 @@ input[type=submit]:hover {
   background-color: #504f4f00;
   padding: 35px;
 }
+
+/* bootstrap modal customize start */
+
+.modal-body
+{
+  background-color:#3f3939;
+
+ 
+}
+.modal-header
+{
+  background-color:#333030;
+  border:0px;
+  color:white;
+}
+.modal-footer
+{
+  background-color:#333030;
+  border:0px;
+}
+.input-group-text
+{
+  background-color:#2e212100;
+  color:white;
+
+  border:0px;
+}
+/* bootstrap modal customize end */
+
+.wala_title
+{
+  position:relative;
+  color:white;
+  left:4px;
+ 
+}
