@@ -260,6 +260,8 @@ body {
 #do_search
 {
   margin-left:30%;
+width:55%;
+  height:50%;
 }
 #do_search_text
 { position:relative;

@@ -68,7 +68,7 @@ body {
   .grid-container {
     position: relative;
     border: 0px solid rgba(231, 209, 9, 0);
-    width: 50%;
+    width: 30%;
     height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -79,13 +79,13 @@ body {
   .grid-item {
     
     position: relative;
-    max-width: 100%;
-    max-height: 100%;
+    width:150px;
+    height: 150px;
     background-color: rgba(224, 15, 15, 0);
     border: 1px solid rgba(223, 16, 16, 0);
     font-size: 30px;
     text-align: center;
-    margin: 10px;
+    margin: 20px;
   }
   .effect-text {
     color: white;
