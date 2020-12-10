@@ -269,6 +269,7 @@ def rent_page(request):
                 list_to_show=None;
             print(list_to_show)
             context={}
+            context["show_happy"]=0
             context["list_to_show"]=list_to_show
             context["searched_item"]=request.GET.get('text')
             context["user_name"]=request.session["fName"]
@@ -276,6 +277,7 @@ def rent_page(request):
             return render(request,'rent_page.html',context)
         else:
             context={}
+            context["show_happy"]=1
             context["user_name"]=request.session["fName"]
             return render(request,'rent_page.html',context)
     else:
@@ -464,8 +466,16 @@ def landing_page(request):
 
 def home_page(request):    
     if request.session.is_empty() == False:
+        images=db.child("images").get()
+        images=images.val()
+        images=list(images.values())
+        images=images[::-1]
+        if len(images)>9:
+            images=images[:9]
+        print(images)
         context={}
         context["user_name"]=request.session["fName"]
+        context["images"]=images
         return render(request,'home_page.html',context)
     else:
         return landing_page_with_context(request, {'first_login' : True})

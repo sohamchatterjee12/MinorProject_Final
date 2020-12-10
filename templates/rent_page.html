@@ -8,9 +8,6 @@
   <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
-  <title>
-    Rent | SAS Online Store
-  </title>
 
 </head>
 <body>
@@ -90,6 +87,13 @@
     </table>
   </div>
   <br>
+
+  {% if show_happy == 1 %}
+  <div class="not_searched" id="do_search">
+    <img id="do_search_img"src="static/common/face_1.png">
+    <p id="do_search_text"> Try searching something </p>
+  </div>
+  {% endif %}
   <!-- ads  -->
 
   <div class="ads_shown" id="ads">
@@ -135,6 +139,12 @@
         </div>
     </span>
     {% endfor %}
+
+    {% elif show_happy == 0 %}
+    <div class="not_searched" id="do_search">
+      <img id="do_search_img"src="static/common/face_0.png">
+      <p id="do_search_text"> No results found</p>
+    </div>
     {% endif %}
     {% endwith %}
   </div>

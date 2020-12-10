@@ -11,10 +11,14 @@ function upload(uid,full_name){
     const metaData={
         contentType:file.type
     }
-    const task=ref.child('lease').child(uid).child(name).put(file,metaData);
+    const task=ref.child(name).put(file,metaData);
     task
     .then(snapshot => snapshot.ref.getDownloadURL())
     .then(url => {
+        firebase.database().ref("/images").push({
+            0:url,
+            1:title.value
+        });
         firebase.database().ref("/lease").child(uid).push({
             0:title.value,
             1:description.value,

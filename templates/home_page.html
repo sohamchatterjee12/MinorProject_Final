@@ -6,9 +6,6 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="icon" href="static/common/logo_final_2.png" type="image/gif" sizes="16x16">
   <link rel="stylesheet" href="static\home_page.css">
-  <title>
-    HOME | SAS Online Store
-  </title>
 </head>
 
 <body>
@@ -57,78 +54,14 @@
 
 
 <div class="grid-container">
+{% for image in images %}
   <div class="grid-item" style="display:inline-block">
-  <a target="_blank" href="logo_final_2.png">
-    <img src="static/common/logo_final_2.png" alt="Cinque Terre"  id="image">
-  </a>
-  <div class="overlay">
-    <div class="effect-text">ADS</div>
+    <img src="{{image.0}}" alt="Cinque Terre"  class="image11">
+    <div class="overlay">
+      <div class="effect-text">{{image.1}}</div>
+    </div>
   </div>
-  </div>
-  <div class="grid-item" style="display:inline-block">
-  <a target="_blank" href="logo_final_2.png">
-    <img src="static/common/logo_final_2.png" alt="Cinque Terre"  id="image">
-  </a>
-  <div class="overlay">
-    <div class="effect-text">ADS</div>
-  </div>
-  </div>
-  <div class="grid-item" style="display:inline-block">
-  <a target="_blank" href="logo_final_2.png">
-    <img src="static/common/logo_final_2.png" alt="Cinque Terre"  id="image">
-  </a>
-  <div class="overlay">
-    <div class="effect-text">ADS</div>
-  </div>
-  </div>
-  <div class="grid-item" style="display:inline-block">
-  <a target="_blank" href="logo_final_2.png">
-    <img src="static/common/logo_final_2.png" alt="Cinque Terre"  id="image">
-  </a>
-  <div class="overlay">
-    <div class="effect-text">ADS</div>
-  </div>
-  </div>
-  <div class="grid-item" style="display:inline-block">
-  <a target="_blank" href="logo_final_2.png">
-    <img src="static/common/logo_final_2.png" alt="Cinque Terre"  id="image">
-  </a>
-  <div class="overlay">
-    <div class="effect-text">ADS</div>
-  </div>
-  </div>
-  <div class="grid-item" style="display:inline-block">
-  <a target="_blank" href="logo_final_2.png">
-    <img src="static/common/logo_final_2.png" alt="Cinque Terre"  id="image">
-  </a>
-  <div class="overlay">
-    <div class="effect-text">ADS</div>
-  </div>
-  </div>
-  <div class="grid-item" style="display:inline-block">
-  <a target="_blank" href="logo_final_2.png">
-    <img src="static/common/logo_final_2.png" alt="Cinque Terre"  id="image">
-  </a>
-  <div class="overlay">
-    <div class="effect-text">ADS</div>
-  </div>
-  </div>
-  <div class="grid-item" style="display:inline-block">
-  <a target="_blank" href="logo_final_2.png">
-    <img src="static/common/logo_final_2.png" alt="Cinque Terre"  id="image">
-  </a>
-  <div class="overlay">
-    <div class="effect-text">ADS</div>
-  </div>
-  </div>
-  <div class="grid-item" style="display:inline-block">
-  <a target="_blank" href="logo_final_2.png">
-    <img src="static/common/logo_final_2.png" alt="Cinque Terre"  id="image">
-  </a>
-  <div class="overlay">
-    <div class="effect-text">ADS</div>
-  </div>
-  </div>
+{% endfor %}
 </div>
 
 

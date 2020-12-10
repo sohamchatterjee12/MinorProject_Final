@@ -61,6 +61,8 @@ function changeStatus(evt, status, uid, parentKey,toFromId,productId,sell_lease_
                 5:1
             });
         }
+
+        
         currentTime=String(new Date()).replace(" GMT+0530 (India Standard Time)","");
         console.log(currentTime)
 
