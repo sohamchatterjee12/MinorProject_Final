@@ -26,6 +26,7 @@ def texts_page(request):
         if msgs1.val() is None : 
             context = {
                 "names" : None,
+                "user_name" : request.session["fName"]
             }
             return render(request,"texts_page.html", context)
         # print(onlineUsers.val())
@@ -384,9 +385,16 @@ def landing_page_register(request):
 
 def landing_page(request):
     if request.session.is_empty()==False:
-        context={
-            "user_name":request.session["fName"]
-        }
+        images=db.child("images").get()
+        images=images.val()
+        images=list(images.values())
+        images=images[::-1]
+        if len(images)>9:
+            images=images[:9]
+        print(images)
+        context={}
+        context["user_name"]=request.session["fName"]
+        context["images"]=images
         return home_page_with_context(request,context)
     if request.method == 'POST':  ## registering a user
         fName = request.POST.get("fName")
