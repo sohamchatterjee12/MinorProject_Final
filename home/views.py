@@ -490,6 +490,16 @@ def home_page(request):
 
 def home_page_with_context(request, context):
     if request.session.is_empty() == False:
+        images=db.child("images").get()
+        images=images.val()
+        images=list(images.values())
+        images=images[::-1]
+        if len(images)>9:
+            images=images[:9]
+        print(images)
+        context={}
+        context["user_name"]=request.session["fName"]
+        context["images"]=images
         return render(request, 'home_page.html', context)
     else:
         return landing_page_with_context(request, {'first_login' : True})
